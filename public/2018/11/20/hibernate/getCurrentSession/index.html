@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="getCurrentSession说明此设置的作用如下：What does sessionFactory.getCurrentSession() do? First, you can call itas many times and anywhere youlike, once you get hold of your SessionFactory (easy thanks toHibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/hibernate/getCurrentSession/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="getCurrentSession说明此设置的作用如下：What does sessionFactory.getCurrentSession() do? First, you can call itas many times and anywhere youlike, once you get hold of your SessionFactory (easy thanks toHibernate">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-20T15:04:10.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="getCurrentSession说明此设置的作用如下：What does sessionFactory.getCurrentSession() do? First, you can call itas many times and anywhere youlike, once you get hold of your SessionFactory (easy thanks toHibernate">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hibernate/getCurrentSession" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/hibernate/getCurrentSession/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.974Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="getcurrentsession说明">getCurrentSession说明</span></h1><p>此设置的作用如下：<br>What does sessionFactory.getCurrentSession() do? First, you can call it<br>as many times and anywhere you<br>like, once you get hold of your SessionFactory (easy thanks to<br>HibernateUtil). The getCurrentSession()<br>method always returns the “current” unit of work. Remember that we<br>switched the configuration option for this<br>mechanism to “thread” in hibernate.cfg.xml? Hence, the scope of the<br>current unit of work is the current Java<br>thread that executes our application. However, this is not the full<br>truth. A Session begins when it is first<br>needed, when the first call to getCurrentSession() is made. It is then<br>bound by Hibernate to the current<br>thread. When the transaction ends, either committed or rolled back,<br>Hibernate also unbinds the Session from<br>the thread and closes it for you. If you call getCurrentSession() again,<br>you get a new Session and can start a<br>new unit of work. This thread-bound programming model is the most<br>popular way of using Hibernate.</p>
+<p>意思是说：</p>
+<p>sessionFactory.getCurrentSession()可以完成一系列的工作，当调用时，<br>hibernate将session绑定到当前线程，事务结束后，hibernate<br>将session从当前线程中释放，并且关闭session。当再次调用getCurrentSession<br>()时，将得到一个新的session，并重新开始这一系列工作。<br>这样调用方法如下：</p>
+<p>Session session = HibernateUtil.getSessionFactory().getCurrentSession();<br>session.beginTransaction();<br>Event theEvent = new Event();<br>theEvent.setTitle(title);<br>theEvent.setDate(theDate);<br>session.save(theEvent);<br>session.getTransaction().commit();</p>
+<p>不需要close session了，但必须在支持事务的上下文中，因为实在事务提交或回滚时关闭的。</p>
+<p>前提是改值设置为了thread.</p>
+<p>1 getCurrentSession创建的session会和绑定到当前线程,而openSession不会。</p>
+<p>2 getCurrentSession创建的线程会在事务回滚或事物提交后自动关闭,而openSession必须手动关闭</p>
+<p>这里getCurrentSession本地事务(本地事务:jdbc)时 要在配置文件里进行如下设置</p>
+<pre><code>* 如果使用的是本地事务（jdbc事务）
+</code></pre> <property name="hibernate.current_session_context_class">thread</property><br> * 如果使用的是全局事务（jta事务）<br> <property name="hibernate.current_session_context_class">jta</property> 
+
+<p> getCurrentSession () 使用当前的session<br>openSession()         重新建立一个新的session</p>
+<p>在一个应用程序中，如果DAO 层使用Spring 的hibernate 模板，通过Spring 来控制session 的生命周期，则首选getCurrentSession ()。</p>
+<p>使用Hibernate的大多数应用程序需要某种形式的“上下文相关的” session，特定的session在整个特定的上下文范围内始终有效。然而，对不同类型的应用程序而言，要为什么是组成这种“上下文”下一个定义通常是困难的；不同的上下文对“当前”这个概念定义了不同的范围。在3.0版本之前，使用Hibernate的程序要么采用自行编写的基于 ThreadLocal的上下文session，要么采用HibernateUtil这样的辅助类，要么采用第三方框架（比如Spring或Pico)，它们提供了基于代理(proxy)或者基于拦截器(interception)的上下文相关session。</p>
+<p>从3.0.1版本开始，Hibernate增加了SessionFactory.getCurrentSession()方法。一开始，它假定了采用JTA事务，JTA事务定义了当前session的范围和上下文(scope and context)。Hibernate开发团队坚信，因为有好几个独立的JTA TransactionManager实现稳定可用，不论是否被部署到一个J2EE容器中，大多数(假若不是所有的）应用程序都应该采用JTA事务管理。基于这一点，采用JTA的上下文相关session可以满足你一切需要。</p>
+<p>更好的是，从3.1开始，SessionFactory.getCurrentSession()的后台实现是可拔插的。因此，我们引入了新的扩展接口 (org.hibernate.context.CurrentSessionContext)和新的配置参数 (hibernate.current_session_context_class)，以便对什么是“当前session”的范围和上下文(scope and context)的定义进行拔插。</p>
+<p>请参阅 org.hibernate.context.CurrentSessionContext接口的Javadoc,那里有关于它的契约的详细讨论。它定义了单一的方法，currentSession()，特定的实现用它来负责跟踪当前的上下文session。Hibernate内置了此接口的两种实现。</p>
+<p>org.hibernate.context.JTASessionContext - 当前session根据JTA来跟踪和界定。这和以前的仅支持JTA的方法是完全一样的。详情请参阅Javadoc。</p>
+<p>org.hibernate.context.ThreadLocalSessionContext - 当前session通过当前执行的线程来跟踪和界定。详情也请参阅Javadoc。</p>
+<p>这两种实现都提供了“每数据库事务对应一个session”的编程模型，也称作每次请求一个session。Hibernate session的起始和终结由数据库事务的生存来控制。假若你采用自行编写代码来管理事务（比如，在纯粹的J2SE,或者 JTA/UserTransaction/BMT），建议你使用Hibernate Transaction API来把底层事务实现从你的代码中隐藏掉。如果你在支持CMT的EJB容器中执行，事务边界是声明式定义的，你不需要在代码中进行任何事务或 session管理操作。请参阅第 11 章 事务和并发一节来阅读更多的内容和示例代码。</p>
+<p>hibernate.current_session_context_class 配置参数定义了应该采用哪个org.hibernate.context.CurrentSessionContext实现。注意，为了向下兼容，如果未配置此参数，但是存在org.hibernate.transaction.TransactionManagerLookup的配置，Hibernate会采用org.hibernate.context.JTASessionContext。一般而言，此参数的值指明了要使用的实现类的全名，但那两个内置的实现可以使用简写，即”jta”和”thread”。</p>
+<p>1、getCurrentSession()与openSession()的区别？</p>
+<ul>
+<li>采用getCurrentSession()创建的session会绑定到当前线程中，而采用openSession()<br>创建的session则不会</li>
+<li>采用getCurrentSession()创建的session在commit或rollback时会自动关闭，而采用openSession()<br>创建的session必须手动关闭<br>2、使用getCurrentSession()需要在hibernate.cfg.xml文件中加入如下配置：</li>
+<li>如果使用的是本地事务（jdbc事务）<property name="hibernate.current_session_context_class">thread</property></li>
+<li>如果使用的是全局事务（jta事务）</li>
+</ul>
+<property name="hibernate.current_session_context_class">jta</property>
+
+<p>利于ThreadLocal模式管理Session<br>   早在Java1.2推出之时，Java平台中就引入了一个新的支持：java.lang.ThreadLocal，给我们在编写多线程程序<br>   时提供了一种新的选择。ThreadLocal是什么呢？其实ThreadLocal并非是一个线程的本地实现版本，它并不是一个Thread，<br>   而是thread local variable(线程局部变量)。也许把它命名为ThreadLocalVar更加合适。线程局部变量(ThreadLocal)<br>   其实的功用非常简单，就是为每一个使用某变量的线程都提供一个该变量值的副本，是每一个线程都可以独立地改变自己的副本，<br>   而不会和其它线程的副本冲突。从线程的角度看，就好像每一个线程都完全拥有一个该变量。<br>   ThreadLocal是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单，在ThreadLocal类中有一个Map，<br>   用于存储每一个线程的变量的副本。比如下面的示例实现(为了简单，没有考虑集合的泛型)：<br>public class HibernateUtil {</p>
+<p>public static final ThreadLocal session =new ThreadLocal();</p>
+<p>public static final SessionFactory sessionFactory;<br>   static {<br>      try {<br>        sessionFactory = new Configuration().configure().buildSessionFactory();<br>      } catch (Throwable ex) {<br>           throw new ExceptionInInitializerError(ex);<br>      }<br>}</p>
+<pre><code> public static Session currentSession () throws HibernateException {
+    Session s = session.get ();
+    if(s == null) {
+      s = sessionFactory.openSession ();
+      session.set(s);
+       }
+     return s;
+   }
+
+public static void closeSession() throws HibernateException {
+       Session s = session.get ();
+    if(s != null) {
+        s.close();
+    }
+    session.set(null);
+}
+</code></pre><p>}</p>
+<p>openSession() 与 getCurrentSession() 有何不同和关联呢？</p>
+<p>在 SessionFactory 启动的时候， Hibernate 会根据配置创建相应的 CurrentSessionContext ，在 getCurrentSession() 被调用的时候，实际被执行的方法是 CurrentSessionContext.currentSession() 。在 currentSession() 执行时，如果当前 Session 为空， currentSession 会调用 SessionFactory 的 openSession 。所以 getCurrentSession() 对于 Java EE 来说是更好的获取 Session 的方法。</p>
+<p>转载自：<a href="http://wenku.baidu.com/link?url=OimQ-55pxZvbAF6EB24aNP4XEJxzfPQEE1Q8gixNlbzPS8coXpuNoekV08ij4aIkQU3P3WC0v0FteFXqgYQuyGHD9lzigQGJuhObHIQ9fH3" target="_blank" rel="noopener">http://wenku.baidu.com/link?url=OimQ-55pxZvbAF6EB24aNP4XEJxzfPQEE1Q8gixNlbzPS8coXpuNoekV08ij4aIkQU3P3WC0v0FteFXqgYQuyGHD9lzigQGJuhObHIQ9fH3</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/hibernate/getCurrentSession/" data-id="cjopxmsqy000bwfo8a3kaz8gm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/20/hibernate/current_thread/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/20/hibernate/hql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/web_xml/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/aop/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/log4j2/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/resultful/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/exceptionHandler/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

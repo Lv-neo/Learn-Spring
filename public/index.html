@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spring/mvc/web_xml" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/mvc/web_xml/" class="article-date">
+  <time datetime="2018-11-20T15:25:12.749Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="spring-mvc-webxml">spring mvc web.xml</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/mvc/web_xml/" data-id="cjopxmsr5000jwfo8ih6vlj43" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/aop" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/mvc/aop/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.990Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="aop开发">aop开发</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/mvc/aop/" data-id="cjopxmsr4000gwfo8v5eglyt2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/log4j2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/mvc/log4j2/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.990Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="log4j2-与-spring-mvc整合">log4j2 与 spring mvc整合</span></h1><h2><span id="maven依赖">maven依赖</span></h2><p>我用的log4j.version = 2.6.2<br>spring.version = 4.3.1.RELEASE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core --&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-web&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2><span id="演示代码">演示代码</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Logger logger = LogManager.getLogger(<span class="keyword">this</span>.getClass());</span><br><span class="line"></span><br><span class="line">ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();</span><br><span class="line">        HttpServletRequest request = attributes.getRequest();</span><br><span class="line"></span><br><span class="line">        logger.info(<span class="string">"URL : "</span> + request.getRequestURL().toString());</span><br><span class="line">        logger.info(<span class="string">"HTTP_METHOD : "</span> + request.getMethod());</span><br><span class="line">        logger.info(<span class="string">"IP : "</span> + request.getRemoteAddr());</span><br><span class="line">        logger.info(<span class="string">"CLASS_METHOD : "</span> + pjp.getSignature().getDeclaringTypeName() + <span class="string">"."</span> + pjp.getSignature().getName());</span><br><span class="line">        logger.info(<span class="string">"ARGS : "</span> + Arrays.toString(pjp.getArgs()));</span><br></pre></td></tr></table></figure>
+<h2><span id="默认配置">默认配置</span></h2><p>在没有任何配置的情况下，log4j2会使用默认配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;Configuration status=&quot;WARN&quot;&gt;</span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</span><br><span class="line">        &lt;/Console&gt;</span><br><span class="line">    &lt;/Appenders&gt;</span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;Root level=&quot;error&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;Console&quot; /&gt;</span><br><span class="line">        &lt;/Root&gt;</span><br><span class="line">    &lt;/Loggers&gt;</span><br><span class="line">&lt;/Configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>该配置只有一个Appender：Console，目标是SYSTEM_OUT，即日志内容，都会打印在eclipse控制台上。Root Logger的级别是error，即：所有error及以上级别的日志才会记录。(注：日志级别顺序为 TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL )，所以最终只有2日志会输出(error,fatal)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 13:07:56.099 [main] ERROR  - error message</span><br><span class="line">2 13:07:56.100 [main] FATAL  - fatal message</span><br><span class="line">3 Hello World!</span><br></pre></td></tr></table></figure>
+<p>配置第1行中的status=”WARN”，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF，设置成“WARN”指：所有log4j2的event信息中，只有WARN及以上级别的信息才记录，大家可以把它改成TRACE试试(最低级别)，看下输出内容有何变化。</p>
+<p>另：配置文件通常命名为log4j2.xml，运行时只要在classpath下能找到即可。</p>
+<h2><span id="文件记录日志">文件记录日志</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!-- log4j2使用说明（create By SeanXiao    ）：</span><br><span class="line">使用方式如下：</span><br><span class="line">private static final Logger logger = LogManager.getLogger(实际类名.class.getName());</span><br><span class="line"></span><br><span class="line">2、日志说明：</span><br><span class="line">（1）请根据实际情况配置各项参数</span><br><span class="line">（2）需要注意日志文件备份数和日志文件大小，注意预留目录空间</span><br><span class="line">（3）实际部署的时候backupFilePatch变量需要修改成linux目录</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;configuration status=&quot;error&quot; monitorInterval=&quot;1800&quot;&gt;</span><br><span class="line">    &lt;Properties&gt;</span><br><span class="line">        &lt;Property name=&quot;fileName&quot;&gt;oauth.mailejifen.com.log&lt;/Property&gt;</span><br><span class="line">        &lt;Property name=&quot;backupFilePatch&quot;&gt;/usr/local/logs/java/&lt;/Property&gt;</span><br><span class="line">    &lt;/Properties&gt;</span><br><span class="line">    &lt;!--先定义所有的appender--&gt;</span><br><span class="line">    &lt;appenders&gt;</span><br><span class="line">        &lt;!--这个输出控制台的配置--&gt;</span><br><span class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span><br><span class="line">            &lt;ThresholdFilter level=&quot;trace&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot; /&gt;</span><br><span class="line">            &lt;!--这个都知道是输出日志的格式--&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot; /&gt;</span><br><span class="line">        &lt;/Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档--&gt;</span><br><span class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;$&#123;backupFilePatch&#125;$&#123;fileName&#125;&quot;</span><br><span class="line">                     filePattern=&quot;$&#123;backupFilePatch&#125;$$&#123;date:yyyy-MM&#125;/app-%d&#123;yyyyMMddHHmmssSSS&#125;.log.gz&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern=&quot;[%d&#123;yyyy.MM.dd HH:mm:ss&#125;] %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!-- 日志文件大小 --&gt;</span><br><span class="line">            &lt;SizeBasedTriggeringPolicy size=&quot;20MB&quot; /&gt;</span><br><span class="line">            &lt;!-- 最多保留文件数 --&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy max=&quot;20&quot;/&gt;</span><br><span class="line">        &lt;/RollingFile&gt;</span><br><span class="line">    &lt;/appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效--&gt;</span><br><span class="line">    &lt;loggers&gt;</span><br><span class="line">        &lt;!--建立一个默认的root的logger--&gt;</span><br><span class="line">        &lt;Logger name=&quot;com.mailejifen.oauth&quot; level=&quot;trace&quot;</span><br><span class="line">                additivity=&quot;true&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot; /&gt;</span><br><span class="line">        &lt;/Logger&gt;</span><br><span class="line">        &lt;Root level=&quot;error&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;Console&quot; /&gt;</span><br><span class="line">        &lt;/Root&gt;</span><br><span class="line">    &lt;/loggers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>configuration中的 monitorInterval=”1800” 指log4j2每隔1800秒（半小时），自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置（很不错的功能！）</p>
+<p>Properties定义了一些属性（可以根据需要自己随便添加），主要是为了后面引用起来方便</p>
+<p>RollingFile 即表示以文件方式记录，注意一下filePattern 的设置，它与20行的SizeBasedTriggeringPolicy （表示单个文件最大多少容量）结合在一起，非常有用，以这段配置为例，当单个文件达到10M后，会自动将以前的内容，先创建类似 2014-09（年-月）的目录，然后按 “xxx-年-月-日-序号”命名，打成压缩包（很体贴的设计，即省了空间，又不丢失以前的日志信息）</p>
+<p>定义了一个新logger，它的级别是trace ，使用文件方式来记录日志，additivity=”true” 这里注意一下，因为下面还有一个root logger，任何其它的logger最终都相当于继承自root logger，所以“com.cnblogs.yjmyzz.App2”这个logger中，如果记录了error及以上级别的日志，除了文件里会记录外，root logger也会生效，即：控制台也会输出一次。如果把additivity=”true” 中的true，改成false，root logger就不会再起作用，即只会记录在文件里，控制台无输出。</p>
+<p>附录：log4j2官方pdf文档<br><a href="http://logging.apache.org/log4j/2.x/log4j-users-guide.pdf" target="_blank" rel="noopener">http://logging.apache.org/log4j/2.x/log4j-users-guide.pdf</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/mvc/log4j2/" data-id="cjopxmsr4000hwfo8mgfj1zoo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/resultful" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/mvc/resultful/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.990Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="resultful">resultful</span></h1><h2><span id="pomxml">pom.xml</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.jackson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-mapper-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="webxml">web.xml</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>auth<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springMVC-servlet.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>springMVC-servlet.xml</p>
+<h2><span id="1234567891011121314151617181920212223242526272829303132333435363738394041424344ltxml-version10-encodingutf-8gtltbeans-default-lazy-inittrue-xmlnshttpwwwspringframeworkorgschemabeans-xmlnsphttpwwwspringframeworkorgschemap-xmlnsxsihttpwwww3org2001xmlschema-instance-xmlnscontexthttpwwwspringframeworkorgschemacontext-xmlnsmvchttpwwwspringframeworkorgschemamvc-xsischemalocation-httpwwwspringframeworkorgschemabeans-httpwwwspringframeworkorgschemabeansspring-beans-31xsd-httpwwwspringframeworkorgschemamvc-httpwwwspringframeworkorgschemamvcspring-mvc-31xsd-httpwwwspringframeworkorgschemacontext-httpwwwspringframeworkorgschemacontextspring-context-31xsdgt-lt-注解驱动-gt-ltmvcannotation-driven-gt-lt-扫描包-gt-ltcontextcomponent-scan-base-packagecommailejifenoauthcontrollers-gt-ltbean-classorgspringframeworkwebservletmvcmethodannotationrequestmappinghandlermapping-gt-ltbean-classorgspringframeworkwebservletmvcmethodannotationrequestmappinghandleradaptergt-ltproperty-namemessageconvertersgt-ltlistgt-ltbean-classorgspringframeworkhttpconverterstringhttpmessageconvertergt-ltproperty-namesupportedmediatypesgt-ltlistgt-ltvaluegttexthtml-charsetutf-8ltvaluegt-ltvaluegtapplicationjsoncharsetutf-8ltvaluegt-ltlistgt-ltpropertygt-ltbeangt-ltbean-classorgspringframeworkhttpconverterjsonmappingjackson2httpmessageconvertergt-ltproperty-namesupportedmediatypesgt-ltlistgt-ltvaluegttexthtml-charsetutf-8ltvaluegt-ltvaluegtapplicationjsoncharsetutf-8ltvaluegt-ltlistgt-ltpropertygt-ltbeangt-ltlistgt-ltpropertygt-ltbeangtltbeansgt"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-lazy-init</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span> <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context/spring-context-3.1.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 注解驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 扫描包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.mailejifen.oauth.controllers"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageConverters"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/mvc/resultful/" data-id="cjopxmsr5000iwfo8q09pquu4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/exceptionHandler" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/mvc/exceptionHandler/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.990Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="spring-mvc中异常处理的类体系结构">Spring MVC中异常处理的类体系结构</span></h1><p>下图展示异常处理的相关的主要类和接口</p>
+<p><img src="img/SpringMVCExceptionResolver.png" alt="alt"></p>
+<p>在Spring MVC中，所有用于处理在请求映射和请求处理过程中抛出的异常的类，都要实现HandlerExceptionResolver接口。AbstractHandlerExceptionResolver实现该接口和Orderd接口，是HandlerExceptionResolver类的实现的基类。ResponseStatusExceptionResolver等具体的异常处理类均在AbstractHandlerExceptionResolver之上，实现了具体的异常处理方式。一个基于Spring MVC的Web应用程序中，可以存在多个实现了HandlerExceptionResolver的异常处理类，他们的执行顺序，由其order属性决定, order值越小，越是优先执行, 在执行到第一个返回不是null的ModelAndView的Resolver时，不再执行后续的尚未执行的Resolver的异常处理方法。。</p>
+<p>下面我逐个介绍一下SpringMVC提供的这些异常处理类的功能。</p>
+<h3><span id="defaulthandlerexceptionresolver">DefaultHandlerExceptionResolver</span></h3><p>HandlerExceptionResolver接口的默认实现，基本上是Spring MVC内部使用，用来处理Spring定义的各种标准异常，将其转化为相对应的HTTP Status Code。其处理的异常类型有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">handleNoSuchRequestHandlingMethod</span><br><span class="line">handleHttpRequestMethodNotSupported</span><br><span class="line">handleHttpMediaTypeNotSupported</span><br><span class="line">handleMissingServletRequestParameter</span><br><span class="line">handleServletRequestBindingException</span><br><span class="line">handleTypeMismatch</span><br><span class="line">handleHttpMessageNotReadable</span><br><span class="line">handleHttpMessageNotWritable</span><br><span class="line">handleMethodArgumentNotValidException</span><br><span class="line">handleMissingServletRequestParameter</span><br><span class="line">handleMissingServletRequestPartException</span><br><span class="line">handleBindException</span><br></pre></td></tr></table></figure>
+<h3><span id="responsestatusexceptionresolver">ResponseStatusExceptionResolver</span></h3><p>用来支持ResponseStatus的使用，处理使用了ResponseStatus注解的异常，根据注解的内容，返回相应的HTTP Status Code和内容给客户端。如果Web应用程序中配置了ResponseStatusExceptionResolver，那么我们就可以使用ResponseStatus注解来注解我们自己编写的异常类，并在Controller中抛出该异常类，之后ResponseStatusExceptionResolver就会自动帮我们处理剩下的工作。</p>
+<p>这是一个自己编写的异常，用来表示订单不存在：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.NOT_FOUND, reason=<span class="string">"No such Order"</span>)  <span class="comment">// 404</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderNotFoundException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">       <span class="comment">// ...</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个使用该异常的Controller方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/orders/&#123;id&#125;"</span>, method=GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">long</span> id, Model model) </span>&#123;</span><br><span class="line">        Order order = orderRepository.findOrderById(id);</span><br><span class="line">        <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> OrderNotFoundException(id);</span><br><span class="line">        model.addAttribute(order);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"orderDetail"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这样，当OrderNotFoundException被抛出时，ResponseStatusExceptionResolver会返回给客户端一个HTTP Status Code为404的响应。</p>
+<h3><span id="annotationmethodhandlerexceptionresolver和exceptionhandlerexceptionresolver">AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver</span></h3><p>用来支持ExceptionHandler注解，使用被ExceptionHandler注解所标记的方法来处理异常。其中AnnotationMethodHandlerExceptionResolver在3.0版本中开始提供，ExceptionHandlerExceptionResolver在3.1版本中开始提供，从3.2版本开始，Spring推荐使用ExceptionHandlerExceptionResolver。<br>如果配置了AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver这两个异常处理bean之一，那么我们就可以使用ExceptionHandler注解来处理异常。</p>
+<p>下面是几个ExceptionHandler注解的使用例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandlingController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// @RequestHandler methods</span></span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以下是异常处理方法</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 将DataIntegrityViolationException转化为Http Status Code为409的响应</span></span><br><span class="line">  <span class="meta">@ResponseStatus</span>(value=HttpStatus.CONFLICT, reason=<span class="string">"Data integrity violation"</span>)  <span class="comment">// 409</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(DataIntegrityViolationException.class)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conflict</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nothing to do</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 针对SQLException和DataAccessException返回视图databaseError</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(&#123;SQLException.class,DataAccessException.class&#125;)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">databaseError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nothing to do.  Returns the logical view name of an error page, passed to</span></span><br><span class="line">    <span class="comment">// the view-resolver(s) in usual way.</span></span><br><span class="line">    <span class="comment">// Note that the exception is _not_ available to this view (it is not added to</span></span><br><span class="line">    <span class="comment">// the model) but see "Extending ExceptionHandlerExceptionResolver" below.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"databaseError"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建ModleAndView，将异常和请求的信息放入到Model中，指定视图名字，并返回该ModleAndView</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(Exception.class)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleError</span><span class="params">(HttpServletRequest req, Exception exception)</span> </span>&#123;</span><br><span class="line">    logger.error(<span class="string">"Request: "</span> + req.getRequestURL() + <span class="string">" raised "</span> + exception);</span><br><span class="line"></span><br><span class="line">    ModelAndView mav = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mav.addObject(<span class="string">"exception"</span>, exception);</span><br><span class="line">    mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</span><br><span class="line">    mav.setViewName(<span class="string">"error"</span>);</span><br><span class="line">    <span class="keyword">return</span> mav;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，上面例子中的ExceptionHandler方法的作用域，只是在本Controller类中。如果需要使用ExceptionHandler来处理全局的Exception，则需要使用ControllerAdvice注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GlobalDefaultExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_ERROR_VIEW = <span class="string">"error"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">defaultErrorHandler</span><span class="params">(HttpServletRequest req, Exception e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 如果异常使用了ResponseStatus注解，那么重新抛出该异常，Spring框架会处理该异常。 </span></span><br><span class="line">        <span class="keyword">if</span> (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 否则创建ModleAndView，处理该异常。</span></span><br><span class="line">        ModelAndView mav = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        mav.addObject(<span class="string">"exception"</span>, e);</span><br><span class="line">        mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</span><br><span class="line">        mav.setViewName(DEFAULT_ERROR_VIEW);</span><br><span class="line">        <span class="keyword">return</span> mav;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="simplemappingexceptionresolver">SimpleMappingExceptionResolver</span></h3><p>提供了将异常映射为视图的能力，高度可定制化。其提供的能力有：</p>
+<ol>
+<li>根据异常的类型，将异常映射到视图；</li>
+<li>可以为不符合处理条件没有被处理的异常，指定一个默认的错误返回；</li>
+<li>处理异常时，记录log信息；</li>
+<li>指定需要添加到Modle中的Exception属性，从而在视图中展示该属性。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(name=<span class="string">"simpleMappingExceptionResolver"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">createSimpleMappingExceptionResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SimpleMappingExceptionResolver r = <span class="keyword">new</span> SimpleMappingExceptionResolver();</span><br><span class="line"></span><br><span class="line">        Properties mappings = <span class="keyword">new</span> Properties();</span><br><span class="line">        mappings.setProperty(<span class="string">"DatabaseException"</span>, <span class="string">"databaseError"</span>);</span><br><span class="line">        mappings.setProperty(<span class="string">"InvalidCreditCardException"</span>, <span class="string">"creditCardError"</span>);</span><br><span class="line"></span><br><span class="line">        r.setExceptionMappings(mappings);  <span class="comment">// 默认为空</span></span><br><span class="line">        r.setDefaultErrorView(<span class="string">"error"</span>);    <span class="comment">// 默认没有</span></span><br><span class="line">        r.setExceptionAttribute(<span class="string">"ex"</span>); </span><br><span class="line">        r.setWarnLogCategory(<span class="string">"example.MvcLogger"</span>); </span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="自定义exceptionresolver">自定义ExceptionResolver</span></h3><p>Spring MVC的异常处理非常的灵活，如果提供的ExceptionResolver类不能满足使用，我们可以实现自己的异常处理类。可以通过继承SimpleMappingExceptionResolver来定制Mapping的方式和能力，也可以直接继承AbstractHandlerExceptionResolver来实现其它类型的异常处理类。</p>
+<h2><span id="spring-mvc是如何创建和使用这些resolver的">Spring MVC是如何创建和使用这些Resolver的？</span></h2><p>首先看Spring MVC是怎么加载异常处理bean的。</p>
+<p>Spring MVC有两种加载异常处理类的方式，一种是根据类型，这种情况下，会加载ApplicationContext下所有实现了</p>
+<ol>
+<li>ExceptionResolver接口的bean，并根据其order属性排序，依次调用；一种是根据名字，这种情况下会加载ApplicationContext下，名字为handlerExceptionResolver的bean。</li>
+<li>不管使用那种加载方式，如果在ApplicationContext中没有找到异常处理bean，那么Spring MVC会加载默认的异常处理bean。</li>
+<li>默认的异常处理bean定义在DispatcherServlet.properties中。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.web.servlet.HandlerExceptionResolver=org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver,\</span><br><span class="line">    org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver,\</span><br><span class="line">    org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver</span><br></pre></td></tr></table></figure>
+<p>以下代码摘自ispatcherServlet，描述了异常处理类的加载过程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Initialize the HandlerMappings used by this class.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;If no HandlerMapping beans are defined in the BeanFactory for this namespace,</span></span><br><span class="line"><span class="comment"> * we default to BeanNameUrlHandlerMapping.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initHandlerMappings</span><span class="params">(ApplicationContext context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.handlerMappings = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.detectAllHandlerMappings) &#123;</span><br><span class="line">        <span class="comment">// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.</span></span><br><span class="line">        Map&lt;String, HandlerMapping&gt; matchingBeans =</span><br><span class="line">                BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, <span class="keyword">true</span>, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (!matchingBeans.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">this</span>.handlerMappings = <span class="keyword">new</span> ArrayList&lt;HandlerMapping&gt;(matchingBeans.values());</span><br><span class="line">            <span class="comment">// We keep HandlerMappings in sorted order.</span></span><br><span class="line">            OrderComparator.sort(<span class="keyword">this</span>.handlerMappings);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            HandlerMapping hm = context.getBean(HANDLER_MAPPING_BEAN_NAME, HandlerMapping.class);</span><br><span class="line">            <span class="keyword">this</span>.handlerMappings = Collections.singletonList(hm);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (NoSuchBeanDefinitionException ex) &#123;</span><br><span class="line">            <span class="comment">// Ignore, we'll add a default HandlerMapping later.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Ensure we have at least one HandlerMapping, by registering</span></span><br><span class="line">    <span class="comment">// a default HandlerMapping if no other mappings are found.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.handlerMappings == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.handlerMappings = getDefaultStrategies(context, HandlerMapping.class);</span><br><span class="line">        <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">            logger.debug(<span class="string">"No HandlerMappings found in servlet '"</span> + getServletName() + <span class="string">"': using default"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后看Spring MVC是怎么使用异常处理bean的。</p>
+<ol>
+<li>Spring MVC把请求映射和处理过程放到try catch中，捕获到异常后，使用异常处理bean进行处理。</li>
+<li>所有异常处理bean按照order属性排序，在处理过程中，遇到第一个成功处理异常的异常处理bean之后，不再调用后续的异常处理bean。</li>
+</ol>
+<p>以下代码摘自DispatcherServlet，描述了处理异常的过程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Process the actual dispatching to the handler.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;The handler will be obtained by applying the servlet's HandlerMappings in order.</span></span><br><span class="line"><span class="comment"> * The HandlerAdapter will be obtained by querying the servlet's installed HandlerAdapters</span></span><br><span class="line"><span class="comment"> * to find the first that supports the handler class.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;All HTTP methods are handled by this method. It's up to HandlerAdapters or handlers</span></span><br><span class="line"><span class="comment"> * themselves to decide which methods are acceptable.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception in case of any kind of processing failure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDispatch</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    HttpServletRequest processedRequest = request;</span><br><span class="line">    HandlerExecutionChain mappedHandler = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">boolean</span> multipartRequestParsed = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ModelAndView mv = <span class="keyword">null</span>;</span><br><span class="line">        Exception dispatchException = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            processedRequest = checkMultipart(request);</span><br><span class="line">            multipartRequestParsed = (processedRequest != request);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Determine handler for the current request.</span></span><br><span class="line">            mappedHandler = getHandler(processedRequest);</span><br><span class="line">            <span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">                noHandlerFound(processedRequest, response);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Determine handler adapter for the current request.</span></span><br><span class="line">            HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Process last-modified header, if supported by the handler.</span></span><br><span class="line">            String method = request.getMethod();</span><br><span class="line">            <span class="keyword">boolean</span> isGet = <span class="string">"GET"</span>.equals(method);</span><br><span class="line">            <span class="keyword">if</span> (isGet || <span class="string">"HEAD"</span>.equals(method)) &#123;</span><br><span class="line">                <span class="keyword">long</span> lastModified = ha.getLastModified(request, mappedHandler.getHandler());</span><br><span class="line">                <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                    logger.debug(<span class="string">"Last-Modified value for ["</span> + getRequestUri(request) + <span class="string">"] is: "</span> + lastModified);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">new</span> ServletWebRequest(request, response).checkNotModified(lastModified) &amp;&amp; isGet) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!mappedHandler.applyPreHandle(processedRequest, response)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Actually invoke the handler.</span></span><br><span class="line">            mv = ha.handle(processedRequest, response, mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            applyDefaultViewName(request, mv);</span><br><span class="line">            mappedHandler.applyPostHandle(processedRequest, response, mv);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            dispatchException = ex;</span><br><span class="line">        &#125;</span><br><span class="line">        processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">        triggerAfterCompletion(processedRequest, response, mappedHandler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Error err) &#123;</span><br><span class="line">        triggerAfterCompletionWithError(processedRequest, response, mappedHandler, err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">            <span class="comment">// Instead of postHandle and afterCompletion</span></span><br><span class="line">            <span class="keyword">if</span> (mappedHandler != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mappedHandler.applyAfterConcurrentHandlingStarted(processedRequest, response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Clean up any resources used by a multipart request.</span></span><br><span class="line">            <span class="keyword">if</span> (multipartRequestParsed) &#123;</span><br><span class="line">                cleanupMultipart(processedRequest);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine an error ModelAndView via the registered HandlerExceptionResolvers.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> handler the executed handler, or &#123;<span class="doctag">@code</span> null&#125; if none chosen at the time of the exception</span></span><br><span class="line"><span class="comment"> * (for example, if multipart resolution failed)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ex the exception that got thrown during handler execution</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a corresponding ModelAndView to forward to</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception if no error ModelAndView found</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">processHandlerException</span><span class="params">(HttpServletRequest request, HttpServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">        Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check registered HandlerExceptionResolvers...</span></span><br><span class="line">    ModelAndView exMv = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (HandlerExceptionResolver handlerExceptionResolver : <span class="keyword">this</span>.handlerExceptionResolvers) &#123;</span><br><span class="line">        exMv = handlerExceptionResolver.resolveException(request, response, handler, ex);</span><br><span class="line">        <span class="keyword">if</span> (exMv != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (exMv != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (exMv.isEmpty()) &#123;</span><br><span class="line">            request.setAttribute(EXCEPTION_ATTRIBUTE, ex);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// We might still need view name translation for a plain error model...</span></span><br><span class="line">        <span class="keyword">if</span> (!exMv.hasView()) &#123;</span><br><span class="line">            exMv.setViewName(getDefaultViewName(request));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">            logger.debug(<span class="string">"Handler execution resulted in exception - forwarding to resolved error view: "</span> + exMv, ex);</span><br><span class="line">        &#125;</span><br><span class="line">        WebUtils.exposeErrorRequestAttributes(request, ex, getServletName());</span><br><span class="line">        <span class="keyword">return</span> exMv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> ex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="何时该使用何种exceptionresolver">何时该使用何种ExceptionResolver？</span></h2><p>Spring提供了很多选择和非常灵活的使用方式，下面是一些使用建议：</p>
+<ol>
+<li>如果自定义异常类，考虑加上ResponseStatus注解；</li>
+<li>对于没有ResponseStatus注解的异常，可以通过使用ExceptionHandler+ControllerAdvice注解，或者通过配置SimpleMappingExceptionResolver，来为整个Web应用提供统一的异常处理。</li>
+<li>如果应用中有些异常处理方式，只针对特定的Controller使用，那么在这个Controller中使用ExceptionHandler注解。</li>
+<li>不要使用过多的异常处理方式，不然的话，维护起来会很苦恼，因为异常的处理分散在很多不同的地方。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/mvc/exceptionHandler/" data-id="cjopxmsrc000vwfo8sq9uh3af" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/ioc_di" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/ioc_di/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.989Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="ioc-ampamp-di">IoC &amp;&amp; DI</span></h1><p>##前言<br>学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对Spring框架的IOC和DI的理解以及谈谈我对Ioc和DI的理解。</p>
+<ul>
+<li><a href="http://jinnianshilongnian.iteye.com/blog/1413846" target="_blank" rel="noopener">开涛的分享</a></li>
+</ul>
+<h2><span id="ioc">IOC</span></h2><h3><span id="是什么">是什么？</span></h3><p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。如何理解好Ioc呢？理解好Ioc的关键是要明确“谁控制谁，控制什么，为何是反转（有反转就应该有正转了），哪些方面反转了”，那我们来深入分析一下：</p>
+<ul>
+<li><p>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</p>
+</li>
+<li><p>为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</p>
+</li>
+</ul>
+<p>先看下传统程序设计，都是主动创建对象实例进行组装<br><img src="/img/ioc/1.jpg" alt="alt"></p>
+<p>当有了IoC/DI的容器后，在客户端类中不再主动去创建这些对象了<br><img src="/img/ioc/2.jpg" alt="alt"></p>
+<h3><span id="能做什么">能做什么</span></h3><p>　IoC 不是一种技术，只是一种思想，一个重要的面向对象编程的法则，它能指导我们如何设计出松耦合、更优良的程序。传统应用程序都是由我们在类内部主动创建依赖对象，从而导致类与类之间高耦合，难于测试；有了IoC容器后，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</p>
+<p>　　其实IoC对编程带来的最大改变不是从代码上，而是从思想上，发生了“主从换位”的变化。应用程序原本是老大，要获取什么资源都是主动出击，但是在IoC/DI思想中，应用程序就变成被动的了，被动的等待IoC容器来创建并注入它所需要的资源了。</p>
+<p>　　IoC很好的体现了面向对象设计法则之一—— 好莱坞法则：“别找我们，我们找你”；即由IoC容器帮对象找相应的依赖对象并注入，而不是由对象主动去找。</p>
+<h2><span id="di">DI</span></h2><p>DI—Dependency Injection，即“依赖注入”：组件之间依赖关系由容器在运行期决定，形象的说，即由容器动态的将某个依赖关系注入到组件之中。依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。</p>
+<p>理解DI的关键是：“谁依赖谁，为什么需要依赖，谁注入谁，注入了什么”，那我们来深入分析一下：</p>
+<p>●谁依赖于谁：当然是应用程序依赖于IoC容器；<br>●为什么需要依赖：应用程序需要IoC容器来提供对象需要的外部资源；<br>●谁注入谁：很明显是IoC容器注入应用程序某个对象，应用程序依赖的对象；<br>●注入了什么：就是注入某个对象所需要的外部资源（包括对象、资源、常量数据）。</p>
+<h2><span id="ioc和di">IOC和DI</span></h2><p>IoC和DI由什么关系呢？其实它们是同一个概念的不同角度描述，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。</p>
+<h2><span id="我对ioc和di的理解">我对IOC和DI的理解</span></h2><p>在日常的开发过程中，我们在实现某个业务场景时候，往往需要多个对象支撑业务构建，在没有使用IOC和DI的时候，我们需要在对象中使用合作对象，均通过new object()的方式动态创建出来，这个时候A要使用B就产生了强依赖，A和B产生了紧密耦合。<br>在Spring中，这一切由spring帮助我们实现，我们只需要在A中告诉spring需要一个B的connection，至于它如何构造，何时构造，A不需要知道。在系统运行时候，spring会在适当时候制造一个Connection，注入到A中。<br>这个时候所有的依赖关系都变了，全部依赖IOC容器，将以前创建对象的主动权和时机移交给IOC容器。</p>
+<h2><span id="附录">附录</span></h2><p>注：如果想要更加深入的了解IoC和DI，请参考大师级人物Martin Fowler的一篇经典文章<a href="http://www.martinfowler.com/articles/injection.html" target="_blank" rel="noopener">《Inversion of Control Containers and the Dependency Injection pattern》</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/ioc_di/" data-id="cjopxmsqv0009wfo8zv9v793l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/aop" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/aop/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.984Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="面向切面">面向切面</span></h1><h3><span id="什么是aop">什么是AOP</span></h3><p>AOP（Aspect-OrientedProgramming，面向方面编程），可以说是OOP（Object-Oriented Programing，面向对象编程）的补充和完善。OOP引入封装、继承和多态性等概念来建立一种对象层次结构，用以模拟公共行为的一个集合。当我们需要为分散的对象引入公共行为的时候，OOP则显得无能为力。也就是说，OOP允许你定义从上到下的关系，但并不适合定义从左到右的关系。例如日志功能。日志代码往往水平地散布在所有对象层次中，而与它所散布到的对象的核心功能毫无关系。对于其他类型的代码，如安全性、异常处理和透明的持续性也是如此。这种散布在各处的无关的代码被称为横切（cross-cutting）代码，在OOP设计中，它导致了大量代码的重复，而不利于各个模块的重用。</p>
+<p>而AOP技术则恰恰相反，它利用一种称为“横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其名为“Aspect”，即方面。所谓“方面”，简单地说，就是将那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可操作性和可维护性。AOP代表的是一个横向的关系，如果说“对象”是一个空心的圆柱体，其中封装的是对象的属性和行为；那么面向方面编程的方法，就仿佛一把利刃，将这些空心圆柱体剖开，以获得其内部的消息。而剖开的切面，也就是所谓的“方面”了。然后它又以巧夺天功的妙手将这些剖开的切面复原，不留痕迹。</p>
+<p>使用“横切”技术，AOP把软件系统分为两个部分：核心关注点和横切关注点。业务处理的主要流程是核心关注点，与之关系不大的部分是横切关注点。横切关注点的一个特点是，他们经常发生在核心关注点的多处，而各处都基本相似。比如权限认证、日志、事务处理。Aop 的作用在于分离系统中的各种关注点，将核心关注点和横切关注点分离开来。正如Avanade公司的高级方案构架师Adam Magee所说，AOP的核心思想就是“将应用程序中的商业逻辑同对其提供支持的通用服务进行分离。”</p>
+<p>实现AOP的技术，主要分为两大类：一是采用动态代理技术，利用截取消息的方式，对该消息进行装饰，以取代原有对象行为的执行；二是采用静态织入的方式，引入特定的语法创建“方面”，从而使得编译器可以在编译期间织入有关“方面”的代码。</p>
+<h3><span id="aop使用场景">AOP使用场景</span></h3><p>AOP用来封装横切关注点，具体可以在下面的场景中使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Authentication 权限</span><br><span class="line">Caching 缓存</span><br><span class="line">Context passing 内容传递</span><br><span class="line">Error handling 错误处理</span><br><span class="line">Lazy loading　懒加载</span><br><span class="line">Debugging　　调试</span><br><span class="line">logging, tracing, profiling and monitoring　记录跟踪　优化　校准</span><br><span class="line">Performance optimization　性能优化</span><br><span class="line">Persistence　　持久化</span><br><span class="line">Resource pooling　资源池</span><br><span class="line">Synchronization　同步</span><br><span class="line">Transactions 事务</span><br></pre></td></tr></table></figure>
+<h3><span id="aop相关概念">AOP相关概念</span></h3><p>方面（Aspect）：一个关注点的模块化，这个关注点实现可能另外横切多个对象。事务管理是J2EE应用中一个很好的横切关注点例子。方面用Spring的 Advisor或拦截器实现。</p>
+<p>连接点（Joinpoint）: 程序执行过程中明确的点，如方法的调用或特定的异常被抛出。</p>
+<p>通知（Advice）: 在特定的连接点，AOP框架执行的动作。各种类型的通知包括“around”、“before”和“throws”通知。通知类型将在下面讨论。许多AOP框架包括Spring都是以拦截器做通知模型，维护一个“围绕”连接点的拦截器链。Spring中定义了四个advice: BeforeAdvice, AfterAdvice, ThrowAdvice和DynamicIntroductionAdvice</p>
+<p>切入点（Pointcut）: 指定一个通知将被引发的一系列连接点的集合。AOP框架必须允许开发者指定切入点：例如，使用正则表达式。 Spring定义了Pointcut接口，用来组合MethodMatcher和ClassFilter，可以通过名字很清楚的理解， MethodMatcher是用来检查目标类的方法是否可以被应用此通知，而ClassFilter是用来检查Pointcut是否应该应用到目标类上</p>
+<p>引入（Introduction）: 添加方法或字段到被通知的类。 Spring允许引入新的接口到任何被通知的对象。例如，你可以使用一个引入使任何对象实现 IsModified接口，来简化缓存。Spring中要使用Introduction, 可有通过DelegatingIntroductionInterceptor来实现通知，通过DefaultIntroductionAdvisor来配置Advice和代理类要实现的接口</p>
+<p>目标对象（Target Object）: 包含连接点的对象。也被称作被通知或被代理对象。POJO</p>
+<p>AOP代理（AOP Proxy）: AOP框架创建的对象，包含通知。 在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</p>
+<p>织入（Weaving）: 组装方面来创建一个被通知对象。这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯Java AOP框架一样，在运行时完成织入。</p>
+<p>Spring AOP组件<br><img src="/img/aop/1.png" alt="alt"></p>
+<h3><span id="如何使用spring-aop">如何使用Spring AOP</span></h3><p>可以通过配置文件或者编程的方式来使用Spring AOP。</p>
+<p>配置可以通过xml文件来进行，大概有四种方式：</p>
+<ul>
+<li>配置ProxyFactoryBean，显式地设置advisors, advice, target等</li>
+<li>配置AutoProxyCreator，这种方式下，还是如以前一样使用定义的bean，但是从容器中获得的其实已经是代理对象</li>
+<li>通过<a href="aop:config" target="_blank" rel="noopener">aop:config</a>来配置</li>
+<li>通过<a href="aop:aspectj-autoproxy" target="_blank" rel="noopener">aop:aspectj-autoproxy</a>来配置，使用AspectJ的注解来标识通知及切入点</li>
+</ul>
+<p>也可以直接使用ProxyFactory来以编程的方式使用Spring AOP，通过ProxyFactory提供的方法可以设置target对象, advisor等相关配置，最终通过 getProxy()方法来获取代理对象</p>
+<p>未完待续……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/aop/" data-id="cjopxmsqt0007wfo8b8wvx8tw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/build-spring" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/build-spring/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.984Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>⁃    # 构建Spring Framework</p>
+<h3><span id="gradle-构建">gradle 构建</span></h3><ul>
+<li>安装jdk，设置JAVA_HOME</li>
+<li>安装<a href="http://www.gradle.org/downloads" target="_blank" rel="noopener">gradle</a></li>
+<li>gradle init 初始化</li>
+<li>设置如下依赖</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'org.springframework:spring-context:4.3.1.RELEASE'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="maven-构建">maven 构建</span></h3><ul>
+<li>安装jdk，设置JAVA_HOME</li>
+<li>安装<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">maven</a> 设置M2_HOME</li>
+<li>mvn 初始化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.mailejifen.oauth -DartifactId=oauth -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mvn 增加Spring Framework依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/build-spring/" data-id="cjopxmsqu0008wfo8y18xmk1a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/annotate/README" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/annotate/README/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.983Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="spring基于annotation的简单介绍">Spring基于Annotation的简单介绍</span></h1><blockquote>
+<p>注解这个话题非常庞大，写这个文章压力也很大，生怕表达不清楚，职能稍做整理，仅供大家参考。</p>
+</blockquote>
+<h1><span id="前言">前言</span></h1><p>Spring 自 2.0 版本开始，陆续引入了一些注解用于简化 Spring 的开发。@Repository 注解便属于最先引入的一批，它用于将数据访问层 (DAO 层 ) 的类标识为 Spring Bean。具体只需将该注解标注在 DAO 类上即可。同时，为了让 Spring 能够扫描类路径中的类并识别出 @Repository 注解，需要在 XML 配置文件中启用 Bean 的自动扫描功能，这可以通过以下代码实现自动扫描。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package = &quot;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h2><span id="注解的基本概念和原理">注解的基本概念和原理</span></h2><p>注解（Annotation）提供了一种安全的类似注释的机制，为我们在代码中添加信息提供了一种形式化得方法，使我们可以在稍后某个时刻方便的使用这些数据（通过解析注解来使用这些数据），用来将任何的信息或者元数据与程序元素（类、方法、成员变量等）进行关联。其实就是更加直观更加明了的说明，这些说明信息与程序业务逻辑没有关系，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类型、构造方法、方法、成员变量、参数及本地变量的申明语句中。</p>
+<p>Annotation其实是一种接口。通过java的反射机制相关的API来访问Annotation信息。相关类（框架或工具中的类）根据这些信息来决定如何使用该程序元素或改变它们的行为。Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/annotate/README/" data-id="cjopxmsr3000ewfo82apbas9e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/annotate/autowired" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/spring/annotate/autowired/" class="article-date">
+  <time datetime="2018-11-20T14:55:26.983Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="autowired注解与自动装配">@Autowired注解与自动装配</span></h1><p>它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。 通过 @Autowired的使用来消除 set ，get方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/11/20/spring/annotate/autowired/" data-id="cjopxmsr3000fwfo8si7ae9qn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/web_xml/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/aop/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/log4j2/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/resultful/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/20/spring/mvc/exceptionHandler/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
