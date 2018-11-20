@@ -1,6 +1,6 @@
-# Json返回
+# resultful
 
-pom.xml
+## pom.xml
 
 ```xml
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
@@ -25,7 +25,7 @@ pom.xml
     </dependency>
 ```
 
-web.xml
+## web.xml
 
 ```xml
 <servlet>
@@ -41,7 +41,7 @@ web.xml
 
 springMVC-servlet.xml
 
-```xml
+## ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans default-lazy-init="true"
        xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"

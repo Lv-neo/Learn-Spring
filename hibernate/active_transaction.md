@@ -1,7 +1,7 @@
 # createSQLQuery is not valid without active transaction 异常
 	org.hibernate.HibernateException: createSQLQuery is not valid without active transaction
 
-### 没有声明事务
+## 没有声明事务
 
 需要在spring-hibernate.xml中增加事务声明
 

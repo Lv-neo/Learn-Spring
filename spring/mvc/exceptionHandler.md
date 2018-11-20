@@ -8,7 +8,7 @@
 
 下面我逐个介绍一下SpringMVC提供的这些异常处理类的功能。
 
-####DefaultHandlerExceptionResolver
+### DefaultHandlerExceptionResolver
 HandlerExceptionResolver接口的默认实现，基本上是Spring MVC内部使用，用来处理Spring定义的各种标准异常，将其转化为相对应的HTTP Status Code。其处理的异常类型有：
 
 ```java
@@ -26,7 +26,7 @@ handleMissingServletRequestPartException
 handleBindException
 ```
 
-####ResponseStatusExceptionResolver
+### ResponseStatusExceptionResolver
 用来支持ResponseStatus的使用，处理使用了ResponseStatus注解的异常，根据注解的内容，返回相应的HTTP Status Code和内容给客户端。如果Web应用程序中配置了ResponseStatusExceptionResolver，那么我们就可以使用ResponseStatus注解来注解我们自己编写的异常类，并在Controller中抛出该异常类，之后ResponseStatusExceptionResolver就会自动帮我们处理剩下的工作。
 
 这是一个自己编写的异常，用来表示订单不存在：
@@ -52,7 +52,7 @@ handleBindException
 
 这样，当OrderNotFoundException被抛出时，ResponseStatusExceptionResolver会返回给客户端一个HTTP Status Code为404的响应。
 
-####AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver
+### AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver
 
 用来支持ExceptionHandler注解，使用被ExceptionHandler注解所标记的方法来处理异常。其中AnnotationMethodHandlerExceptionResolver在3.0版本中开始提供，ExceptionHandlerExceptionResolver在3.1版本中开始提供，从3.2版本开始，Spring推荐使用ExceptionHandlerExceptionResolver。
 如果配置了AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver这两个异常处理bean之一，那么我们就可以使用ExceptionHandler注解来处理异常。
@@ -122,7 +122,7 @@ class GlobalDefaultExceptionHandler {
 }
 ```
 
-####SimpleMappingExceptionResolver
+### SimpleMappingExceptionResolver
 提供了将异常映射为视图的能力，高度可定制化。其提供的能力有：
 
 1. 根据异常的类型，将异常映射到视图；
@@ -152,10 +152,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 }
 ```
 
-####自定义ExceptionResolver
+### 自定义ExceptionResolver
 Spring MVC的异常处理非常的灵活，如果提供的ExceptionResolver类不能满足使用，我们可以实现自己的异常处理类。可以通过继承SimpleMappingExceptionResolver来定制Mapping的方式和能力，也可以直接继承AbstractHandlerExceptionResolver来实现其它类型的异常处理类。
 
-###Spring MVC是如何创建和使用这些Resolver的？
+## Spring MVC是如何创建和使用这些Resolver的？
 
 首先看Spring MVC是怎么加载异常处理bean的。
 
@@ -355,7 +355,7 @@ protected ModelAndView processHandlerException(HttpServletRequest request, HttpS
 }
 ```
 
-###何时该使用何种ExceptionResolver？
+## 何时该使用何种ExceptionResolver？
 Spring提供了很多选择和非常灵活的使用方式，下面是一些使用建议：
 
 1. 如果自定义异常类，考虑加上ResponseStatus注解；

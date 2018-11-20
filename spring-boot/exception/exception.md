@@ -11,7 +11,7 @@ Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目
 
 Spring Boot在启动过程中会根据当前环境进行AutoConfiguration，其中跟MVC错误处理相关的配置内容，在ErrorMvcAutoConfiguration这个类中。以下会分块介绍这个类里面的配置。
 
-###在Servlet容器中添加了一个默认的错误页面
+## 在Servlet容器中添加了一个默认的错误页面
 因为ErrorMvcAutoConfiguration类实现了EmbeddedServletContainerCustomizer接口，所以可以通过override customize方法来定制Servlet容器。以下代码摘自ErrorMvcAutoConfiguration：
 
 ```java

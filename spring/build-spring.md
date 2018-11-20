@@ -1,6 +1,6 @@
 	⁃	# 构建Spring Framework
 
-###gradle 构建
+### gradle 构建
 
 * 安装jdk，设置JAVA_HOME
 * 安装[gradle](http://www.gradle.org/downloads)
@@ -13,7 +13,7 @@ dependencies {
 }
 ```
 
-###maven 构建
+### maven 构建
 
 * 安装jdk，设置JAVA_HOME
 * 安装[maven](http://maven.apache.org/download.cgi) 设置M2_HOME

@@ -1,7 +1,7 @@
 # spring-boot 传统部署方式
 
-##war方式
-###修改你的Application
+## war方式
+### 修改你的Application
 产生一个war包，应该提供一个SpringBootServletInitializer子类并覆盖它的configure 方法
 这样让spring framework Servlet 3.0 支持通过你的配置和应用程序产生一个Servlet容器。
 
@@ -29,22 +29,22 @@ public class Application extends SpringBootServletInitializer {
 
 ```
 
-###maven or gradle 配置
-####maven
+### maven or gradle 配置
+#### maven
 要先依赖spring-boot-starter-parent 
 然后加上
 
 ```java
 <packaging>war</packaging>
 ```
-####gradle
+#### gradle
 
 ```java
 apply plugin: 'war'
 ```
 
-###去掉tomcat容器
-####maven
+### 去掉tomcat容器
+#### maven
 ```
 <dependencies>
     <!-- … -->
@@ -57,7 +57,7 @@ apply plugin: 'war'
 </dependencies>
 
 ```
-####gradle
+#### gradle
 ```
 dependencies {
     // …
@@ -67,7 +67,7 @@ dependencies {
 ```
 
 
-###附录
+### 附录
 http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-traditional-deployment
 
 

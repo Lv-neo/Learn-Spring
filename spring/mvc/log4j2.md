@@ -1,6 +1,6 @@
 # log4j2 与 spring mvc整合
 
-###maven依赖
+## maven依赖
 我用的log4j.version = 2.6.2
 spring.version = 4.3.1.RELEASE
 
@@ -23,7 +23,7 @@ spring.version = 4.3.1.RELEASE
     </dependency>
 ```
 
-###演示代码
+## 演示代码
 
 ```java
 private Logger logger = LogManager.getLogger(this.getClass());
@@ -39,7 +39,7 @@ ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextH
 
 ```
 
-###默认配置
+## 默认配置
 
 在没有任何配置的情况下，log4j2会使用默认配置：
 
@@ -72,7 +72,7 @@ ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextH
 另：配置文件通常命名为log4j2.xml，运行时只要在classpath下能找到即可。
 
 
-###文件记录日志
+## 文件记录日志
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

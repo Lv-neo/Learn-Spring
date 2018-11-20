@@ -1,6 +1,6 @@
 # spring-boot使用redis
 
-###导入jar
+## 导入jar
 
 ```
 <dependency>
@@ -9,7 +9,7 @@
 </dependency>
 ```
 
-###配置
+## 配置
 
 ```
 # REDIS (RedisProperties)
@@ -24,7 +24,7 @@ spring.redis.pool.max-wait=-1
 server.port=8081
 ```
 
-#编写cache管理类
+# 编写cache管理类
 
 ```
 package com.example;
@@ -113,7 +113,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 ```
 
-###在方法前面加上缓存
+## 在方法前面加上缓存
 
 ```
 RequestMapping("/")
@@ -126,7 +126,7 @@ return string;
 }
 ```
 
-###附录
+## 附录
 @Cacheable参数
 value  指明缓存将被存到什么地方。
 key     Spring默认使用被@Cacheable注解的方法的签名来作为key

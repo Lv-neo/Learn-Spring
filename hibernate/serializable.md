@@ -1,1 +1,1 @@
-# 
+# hibernate 序列化

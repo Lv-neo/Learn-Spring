@@ -1,2 +1,2 @@
-# maven spring mvc hibernate
+#  spring+hibernate+maven
 
