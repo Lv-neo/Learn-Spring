@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lv-neo.github.io/Learn-Spring/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/Learn-Spring/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Learn-Spring/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Learn-Spring/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/">Home</a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Learn-Spring/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lv-neo.github.io/Learn-Spring"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spring-boot/file/loadFile" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/file/loadFile/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.421Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring-boot/file/loadFile/">如何在spring boot中加载文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#如何在spring-boot中加载文件">如何在spring boot中加载文件</a><ul>
+<li><a href="#jar加载">jar加载</a></li>
+<li><a href="#war加载">war加载</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="如何在spring-boot中加载文件">如何在spring boot中加载文件</span></h1><blockquote>
+<p>今天有同学在做支付验证问题，本地调试spring boot 用idea集成的jar方式工作，准备上到测试环境打包成war后发现，加载到签名key文件无法读取。然后我们来研究下如何使用spring boot 加载文件。</p>
+</blockquote>
+<h2><span id="jar加载">jar加载</span></h2><p>spring boot默认加载文件的路径是 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/META-INF/resources/ </span><br><span class="line">/resources/ </span><br><span class="line">/static/ </span><br><span class="line">/public/ </span><br><span class="line"></span><br><span class="line">//源码里有</span><br><span class="line">private static final String[] CLASSPATH_RESOURCE_LOCATIONS = &#123;  </span><br><span class="line">        &quot;classpath:/META-INF/resources/&quot;, &quot;classpath:/resources/&quot;,  </span><br><span class="line">        &quot;classpath:/static/&quot;, &quot;classpath:/public/&quot; &#125;;</span><br><span class="line">        </span><br><span class="line">//配置里也有</span><br><span class="line">spring.resources.static-locations=classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/ # Locations of static resources. </span><br><span class="line"></span><br><span class="line">所有本地的静态资源都配置在了classpath下面了, 而非在webapp下了</span><br></pre></td></tr></table></figure>
+<p>我们可以看到spring boot 已经将公共文件夹，静态，资源<br>都定义好了，一般情况下，按照实际情况分配代码就好了</p>
+<h2><span id="war加载">war加载</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/file/loadFile/" data-id="cjopxmsr7000nwfo8e40rgtno" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot/exception/whitelabel" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.413Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/">自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#自定义白标whitelabel可以了解下相关理念错误页面">自定义’白标’（whitelabel，可以了解下相关理念）错误页面</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="自定义白标whitelabel可以了解下相关理念错误页面">自定义’白标’（whitelabel，可以了解下相关理念）错误页面</span></h1><p>Spring Boot安装了一个’whitelabel’错误页面，如果你遇到一个服务器错误（机器客户端消费的是JSON，其他媒体类型则会看到一个具有正确错误码的合乎情理的响应），那就能在客户端浏览器中看到该页面。你可以设置error.whitelabel.enabled=false来关闭该功能，但通常你想要添加自己的错误页面来取代whitelabel。确切地说，如何实现取决于你使用的模板技术。例如，你正在使用Thymeleaf，你将添加一个error.html模板。如果你正在使用FreeMarker，那你将添加一个error.ftl模板。通常，你需要的只是一个名称为error的View，和/或一个处理/error路径的@Controller。除非你替换了一些默认配置，否则你将在你的ApplicationContext中找到一个BeanNameViewResolver，所以一个id为error的@Bean可能是完成该操作的一个简单方式。详情参考ErrorMvcAutoConfiguration。<br>查看Error Handling章节，了解下如何将处理器（handlers）注册到servlet容器中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/" data-id="cjopxmsr6000lwfo8k87vnhwz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot/exception/exception" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/exception/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.407Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring-boot/exception/exception/">ErrorController</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#errorcontroller">ErrorController</a><ul>
+<li><a href="#在servlet容器中添加了一个默认的错误页面">在Servlet容器中添加了一个默认的错误页面</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="errorcontroller">ErrorController</span></h1><p>背景</p>
+<p>Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理，参看以下</p>
+<p>在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Spring Boot为我们做了哪些工作。下图列出了Spring Boot中跟MVC异常处理相关的类。</p>
+<p><img src="imgs/SpringBootWebExceptionResolver.png" alt="alt"></p>
+<p>Spring Boot在启动过程中会根据当前环境进行AutoConfiguration，其中跟MVC错误处理相关的配置内容，在ErrorMvcAutoConfiguration这个类中。以下会分块介绍这个类里面的配置。</p>
+<h2><span id="在servlet容器中添加了一个默认的错误页面">在Servlet容器中添加了一个默认的错误页面</span></h2><p>因为ErrorMvcAutoConfiguration类实现了EmbeddedServletContainerCustomizer接口，所以可以通过override customize方法来定制Servlet容器。以下代码摘自ErrorMvcAutoConfiguration：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value</span>(<span class="string">"$&#123;error.path:/error&#125;"</span>)</span><br><span class="line"><span class="keyword">private</span> String errorPath = <span class="string">"/error"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">    container.addErrorPages(<span class="keyword">new</span> ErrorPage(<span class="keyword">this</span>.properties.getServletPrefix()</span><br><span class="line">        + <span class="keyword">this</span>.errorPath));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到ErrorMvcAutoConfiguration在容器中，添加了一个错误页面/error。因为这项配置的存在，如果Spring MVC在处理过程抛出异常到Servlet容器，容器会定向到这个错误页面/error。</p>
+<p>那么我们有什么可以配置的呢？</p>
+<p>我们可以配置错误页面的url，/error是默认值，我们可以再application.properties中通过设置error.path的值来配置该页面的url；<br>我们可以提供一个自定义的EmbeddedServletContainerCustomizer，添加更多的错误页面，比如对不同的http status code，使用不同的错误处理页面。就像下面这段代码一样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EmbeddedServletContainerCustomizer <span class="title">containerCustomizer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedServletContainerCustomizer() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">            container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.NOT_FOUND, <span class="string">"/404"</span>));</span><br><span class="line">            container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, <span class="string">"/500"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###定义了ErrorAttributes接口，并默认配置了一个DefaultErrorAttributes Bean</p>
+<p>以下代码摘自ErrorMvcAutoConfiguration：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>(value = ErrorAttributes.class, search = SearchStrategy.CURRENT)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultErrorAttributes <span class="title">errorAttributes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultErrorAttributes();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下代码摘自DefaultErrorAttributes, ErrorAttributes, HandlerExceptionResolver：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Order</span>(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultErrorAttributes</span> <span class="keyword">implements</span> <span class="title">ErrorAttributes</span>, <span class="title">HandlerExceptionResolver</span>,</span></span><br><span class="line"><span class="class">    <span class="title">Ordered</span> </span>&#123;</span><br><span class="line">    <span class="comment">//篇幅原因，忽略类的实现代码。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ErrorAttributes</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span><span class="params">(RequestAttributes requestAttributes,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">boolean</span> includeStackTrace)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Throwable <span class="title">getError</span><span class="params">(RequestAttributes requestAttributes)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerExceptionResolver</span> </span>&#123;</span><br><span class="line">    <span class="function">ModelAndView <span class="title">resolveException</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个DefaultErrorAttributes有什么用呢？主要有两个作用:</p>
+<ol>
+<li>实现了ErrorAttributes接口，具备提供Error Attributes的能力，当处理/error错误页面时，需要从该bean中读取错误信息以供返回；</li>
+<li>实现了HandlerExceptionResolver接口并具有最高优先级，即DispatcherServlet在doDispatch过程中有异常抛出时，先由DefaultErrorAttributes处理。从下面代码中可以发现，DefaultErrorAttributes在处理过程中，是讲ErrorAttributes保存到了request中。事实上，这是DefaultErrorAttributes能够在后面返回Error Attributes的原因，实现HandlerExceptionResolver接口，是DefaultErrorAttributes实现ErrorAttributes接口的手段。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">    HttpServletResponse response, Object handler, Exception ex)</span> </span>&#123;</span><br><span class="line">    storeErrorAttributes(request, ex);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们有什么可以配置的呢？</p>
+<p>1、我们可以继承DefaultErrorAttributes，修改Error Attributes，比如下面这段代码，去掉了默认存在的error和exception这两个字段，以隐藏敏感信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultErrorAttributes <span class="title">errorAttributes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultErrorAttributes() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span> <span class="params">(RequestAttributes requestAttributes,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">boolean</span> includeStackTrace)</span></span>&#123;</span><br><span class="line">            Map&lt;String, Object&gt; errorAttributes = <span class="keyword">super</span>.getErrorAttributes(requestAttributes, includeStackTrace);</span><br><span class="line">            errorAttributes.remove(<span class="string">"error"</span>);</span><br><span class="line">            errorAttributes.remove(<span class="string">"exception"</span>);</span><br><span class="line">            <span class="keyword">return</span> errorAttributes;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>我们可以自己实现ErrorAttributes接口，实现自己的Error Attributes方案, 只要配置一个类型为ErrorAttributes的bean，默认的DefaultErrorAttributes就不会被配置。</li>
+</ol>
+<p>###提供并配置了ErrorController和ErrorView<br>ErrorController和ErrorView提供了对错误页面/error的支持。ErrorMvcAutoConfiguration默认配置了BasicErrorController和WhiteLabelErrorView，以下代码摘自ErrorMvcAutoConfiguration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>(value = ErrorController.class, search = SearchStrategy.CURRENT)</span><br><span class="line"><span class="function"><span class="keyword">public</span> BasicErrorController <span class="title">basicErrorController</span><span class="params">(ErrorAttributes errorAttributes)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BasicErrorController(errorAttributes);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"error.whitelabel"</span>, name = <span class="string">"enabled"</span>, matchIfMissing = <span class="keyword">true</span>)</span><br><span class="line"><span class="meta">@Conditional</span>(ErrorTemplateMissingCondition.class)</span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WhitelabelErrorViewConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> SpelView defaultErrorView = <span class="keyword">new</span> SpelView(</span><br><span class="line">            <span class="string">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;Whitelabel Error Page&lt;/h1&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;p&gt;This application has no explicit mapping for /error, so you are seeing this as a fallback.&lt;/p&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div id='created'&gt;$&#123;timestamp&#125;&lt;/div&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div&gt;There was an unexpected error (type=$&#123;error&#125;, status=$&#123;status&#125;).&lt;/div&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div&gt;$&#123;message&#125;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"error"</span>)</span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(name = <span class="string">"error"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">defaultErrorView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.defaultErrorView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If the user adds @EnableWebMvc then the bean name view resolver from</span></span><br><span class="line">    <span class="comment">// WebMvcAutoConfiguration disappears, so add it back in to avoid disappointment.</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(BeanNameViewResolver.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> BeanNameViewResolver <span class="title">beanNameViewResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BeanNameViewResolver resolver = <span class="keyword">new</span> BeanNameViewResolver();</span><br><span class="line">        resolver.setOrder(Ordered.LOWEST_PRECEDENCE - <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> resolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ErrorController根据Accept头的内容，输出不同格式的错误响应。比如针对浏览器的请求生成html页面，针对其它请求生成json格式的返回。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"$&#123;error.path:/error&#125;"</span>, produces = <span class="string">"text/html"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">errorHtml</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"error"</span>, getErrorAttributes(request, <span class="keyword">false</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"$&#123;error.path:/error&#125;"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request) &#123;</span><br><span class="line">    Map&lt;String, Object&gt; body = getErrorAttributes(request, getTraceParameter(request));</span><br><span class="line">    HttpStatus status = getStatus(request);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(body, status);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>WhitelabelErrorView则提供了一个默认的白板错误页面。</p>
+<p>我们有什么可以配置的呢？</p>
+<p>我们可以提供自己的名字为error的view，以替换掉默认的白板页面，提供自己想要的样式。<br>我们可以继承BasicErrorController或者干脆自己实现ErrorController接口，用来响应/error这个错误页面请求，可以提供更多类型的错误格式等。<br>总结<br>Spring Boot提供了默认的统一错误页面，这是Spring MVC没有提供的。在理解了Spring Boot提供的错误处理相关内容之后，我们可以方便的定义自己的错误返回的格式和内容。不过，如果要实现统一的REST API接口的出错响应，就如这篇文章里的这样，还是要做不少工作的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/exception/" data-id="cjopxmsra000uwfo8hrce5i48" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot/exception/errorController" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/errorController/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.402Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring-boot/exception/errorController/">Springboot自定义异常处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#springboot自定义异常处理">Springboot自定义异常处理</a><ul>
+<li><a href="#具体实现">具体实现</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="springboot自定义异常处理">Springboot自定义异常处理</span></h1><p>Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理情参考<a href="exception.md">Spring boot异常处理详解</a></p>
+<h2><span id="具体实现">具体实现</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EmbeddedServletContainerCustomizer <span class="title">containerCustomizer</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedServletContainerCustomizer()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">                container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.NOT_FOUND, <span class="string">"/error/404"</span>));</span><br><span class="line">                container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, <span class="string">"/error/500"</span>));</span><br><span class="line">                container.addErrorPages(<span class="keyword">new</span> ErrorPage(java.lang.Throwable.class,<span class="string">"/error/500"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>重写通过实现ErrorController，重写BasicErrorController的功能实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line">* 重写BasicErrorController,主要负责系统的异常页面的处理以及错误信息的显示</span><br><span class="line"> * <span class="meta">@see</span> org.springframework.boot.autoconfigure.web.BasicErrorController</span><br><span class="line"> * <span class="meta">@see</span> org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration</span><br><span class="line"> *</span><br><span class="line"> * <span class="meta">@author</span> Jonathan</span><br><span class="line"> * <span class="meta">@version</span> <span class="number">2016</span>/<span class="number">5</span>/<span class="number">31</span> <span class="number">11</span>:<span class="number">22</span></span><br><span class="line"> * <span class="meta">@since</span> JDK <span class="number">7.0</span>+</span><br><span class="line"> */</span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"error"</span>)</span><br><span class="line"><span class="meta">@EnableConfigurationProperties</span>(&#123;ServerProperties.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionController</span> <span class="keyword">implements</span> <span class="title">ErrorController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ErrorAttributes errorAttributes;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ServerProperties serverProperties;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化ExceptionController</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> errorAttributes</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ExceptionController</span><span class="params">(ErrorAttributes errorAttributes)</span> </span>&#123;</span><br><span class="line">        Assert.notNull(errorAttributes, <span class="string">"ErrorAttributes must not be null"</span>);</span><br><span class="line">        <span class="keyword">this</span>.errorAttributes = errorAttributes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义404的ModelAndView</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(produces = <span class="string">"text/html"</span>,value = <span class="string">"404"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">errorHtml404</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">        response.setStatus(getStatus(request).value());</span><br><span class="line">        Map&lt;String, Object&gt; model = getErrorAttributes(request,</span><br><span class="line">                isIncludeStackTrace(request, MediaType.TEXT_HTML));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"error/404"</span>, model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义404的JSON数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"404"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error404(HttpServletRequest request) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; body = getErrorAttributes(request,</span><br><span class="line">                isIncludeStackTrace(request, MediaType.TEXT_HTML));</span><br><span class="line">        HttpStatus status = getStatus(request);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(body, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义500的ModelAndView</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(produces = <span class="string">"text/html"</span>,value = <span class="string">"500"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">errorHtml500</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">        response.setStatus(getStatus(request).value());</span><br><span class="line">        Map&lt;String, Object&gt; model = getErrorAttributes(request,</span><br><span class="line">                isIncludeStackTrace(request, MediaType.TEXT_HTML));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"error/500"</span>, model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义500的错误JSON信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"500"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error500(HttpServletRequest request) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; body = getErrorAttributes(request,</span><br><span class="line">                isIncludeStackTrace(request, MediaType.TEXT_HTML));</span><br><span class="line">        HttpStatus status = getStatus(request);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(body, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Determine if the stacktrace attribute should be included.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request the source request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> produces the media type produced (or &#123;<span class="doctag">@code</span> MediaType.ALL&#125;)</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> if the stacktrace attribute should be included</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isIncludeStackTrace</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                          MediaType produces)</span> </span>&#123;</span><br><span class="line">        ErrorProperties.IncludeStacktrace include = <span class="keyword">this</span>.serverProperties.getError().getIncludeStacktrace();</span><br><span class="line">        <span class="keyword">if</span> (include == ErrorProperties.IncludeStacktrace.ALWAYS) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM) &#123;</span><br><span class="line">            <span class="keyword">return</span> getTraceParameter(request);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取错误的信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> includeStackTrace</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                   <span class="keyword">boolean</span> includeStackTrace)</span> </span>&#123;</span><br><span class="line">        RequestAttributes requestAttributes = <span class="keyword">new</span> ServletRequestAttributes(request);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.errorAttributes.getErrorAttributes(requestAttributes,</span><br><span class="line">                includeStackTrace);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否包含trace</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">getTraceParameter</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        String parameter = request.getParameter(<span class="string">"trace"</span>);</span><br><span class="line">        <span class="keyword">if</span> (parameter == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> !<span class="string">"false"</span>.equals(parameter.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取错误编码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> HttpStatus <span class="title">getStatus</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        Integer statusCode = (Integer) request</span><br><span class="line">                .getAttribute(<span class="string">"javax.servlet.error.status_code"</span>);</span><br><span class="line">        <span class="keyword">if</span> (statusCode == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> HttpStatus.INTERNAL_SERVER_ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> HttpStatus.valueOf(statusCode);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> HttpStatus.INTERNAL_SERVER_ERROR;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 实现错误路径,暂时无用</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> ExceptionMvcAutoConfiguration#containerCustomizer()</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getErrorPath</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结</p>
+<p>第一步，通过定义containerCustomizer,重写定义了异常处理对应的视图。目前定义了404和500，可以继续扩展。<br>第二步，重写BasicErrorController,当然可以直接定义一个普通的controller类，直接实现第一步定义的视图的方法。重写的目的是重用ErrorAttributes。这样在页面，直接可以获取到status,message,exception,trace等内容。<br>如果仅仅是把异常处理的视图作为静态页面，不需要看到异常信息内容的话，直接第一步后，再定义error/404，error/500等静态视图即可。</p>
+<p>以上两步的操作，比网上流传的更能实现自定义化。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/errorController/" data-id="cjopxmsr6000kwfo8rxsrif8e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot/aop" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/aop/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.393Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring-boot/aop/">何为aop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#何为aop">何为aop</a><ul>
+<li><a href="#aop名词">aop名词</a></li>
+<li><a href="#注解">注解</a></li>
+<li><a href="#spring-aop支持在切入点表达式中使用如下的切入点指示符">Spring AOP支持在切入点表达式中使用如下的切入点指示符：</a></li>
+<li><a href="#spring-aop支持的通知">spring aop支持的通知：</a></li>
+<li><a href="#切入点表达式">切入点表达式</a></li>
+<li><a href="#准备工作">准备工作</a></li>
+<li><a href="#aop方法">AOP方法</a></li>
+<li><a href="#优化aop切面中的同步问题">优化：AOP切面中的同步问题</a></li>
+<li><a href="#优化aop切面的优先级">优化：AOP切面的优先级</a></li>
+<li><a href="#aop实现web签名验证">AOP实现web签名验证</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="何为aop">何为aop</span></h1><p>　　aop全称Aspect Oriented Programming，面向切面，AOP主要实现的目的是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，以获得逻辑过程中各部分之间低耦合性的隔离效果。其与设计模式完成的任务差不多，是提供另一种角度来思考程序的结构，来弥补面向对象编程的不足。</p>
+<p>　　通俗点讲就是提供一个为一个业务实现提供切面注入的机制，通过这种方式，在业务运行中将定义好的切面通过切入点绑定到业务中，以实现将一些特殊的逻辑绑定到此业务中。</p>
+<p>　　比如，若是需要一个记录日志的功能，首先想到的是在方法中通过log4j或其他框架来进行记录日志，但写下来发现一个问题，在整个业务中其实核心的业务代码并没有多少，都是一些记录日志或其他辅助性的一些代码。而且很多业务有需要相同的功能，比如都需要记录日志，这时候又需要将这些记录日志的功能复制一遍，即使是封装成框架，也是需要调用之类的。在此处使用复杂的设计模式又得不偿失。</p>
+<h2><span id="aop名词">aop名词</span></h2><p>　　先介绍一些aop的名词，其实这些名词对使用aop没什么影响，但为了更好的理解最好知道一些</p>
+<ul>
+<li><p>切面（Aspect）：一个关注点的模块化，这个关注点可能会横切多个对象。事务管理是J2EE应用中一个关于横切关注点的很好的例子。</p>
+</li>
+<li><p>连接点（Joinpoint）：在程序执行过程中某个特定的点，比如某方法调用的时候或者处理异常的时候。在Spring AOP中，一个连接点总是表示一个方法的执行。</p>
+</li>
+<li><p>通知（Advice）：在切面的某个特定的连接点上执行的动作。其中包括了“around”、“before”和“after”等不同类型的通知（通知的类型将在后面部分进行讨论）。许多AOP框架（包括Spring）都是以拦截器做通知模型，并维护一个以连接点为中心的拦截器链。</p>
+</li>
+<li><p>切入点（Pointcut）：匹配连接点的断言。通知和一个切入点表达式关联，并在满足这个切入点的连接点上运行（例如，当执行某个特定名称的方法时）。切入点表达式如何和连接点匹配是AOP的核心：Spring缺省使用AspectJ切入点语法。</p>
+</li>
+<li><p>引入（Introduction）：用来给一个类型声明额外的方法或属性（也被称为连接类型声明（inter-type declaration））。Spring允许引入新的接口（以及一个对应的实现）到任何被代理的对象。例如，你可以使用引入来使一个bean实现IsModified接口，以便简化缓存机制。</p>
+</li>
+<li><p>目标对象（Target Object）：被一个或者多个切面所通知的对象。也被称做被通知（advised）对象。既然Spring AOP是通过运行时代理实现的，这个对象永远是一个被代理（proxied）对象。</p>
+</li>
+<li><p>AOP代理（AOP Proxy）：AOP框架创建的对象，用来实现切面契约（例如通知方法执行等等）。在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</p>
+</li>
+<li><p>织入（Weaving）：把切面连接到其它的应用程序类型或者对象上，并创建一个被通知的对象。这些可以在编译时（例如使用AspectJ编译器），类加载时和运行时完成。Spring和其他纯Java AOP框架一样，在运行时完成织入。</p>
+</li>
+</ul>
+<p>其中重要的名词有：切面，切入点</p>
+<h2><span id="注解">注解</span></h2><ul>
+<li><p>@Aspect:描述一个切面类，定义切面类的时候需要打上这个注解</p>
+</li>
+<li><p>@Configuration：spring-boot配置类</p>
+</li>
+<li><p>@Pointcut：声明一个切入点，切入点决定了连接点关注的内容，使得我们可以控制通知什么时候执行。Spring AOP只支持Spring bean的方法执行连接点。所以你可以把切入点看做是Spring bean上方法执行的匹配。一个切入点声明有两个部分：一个包含名字和任意参数的签名，还有一个切入点表达式，该表达式决定了我们关注那个方法的执行。</p>
+</li>
+</ul>
+<p>　注：作为切入点签名的方法必须返回void 类型</p>
+<h2><span id="spring-aop支持在切入点表达式中使用如下的切入点指示符">Spring AOP支持在切入点表达式中使用如下的切入点指示符：　　　　</span></h2><ul>
+<li><p>execution - 匹配方法执行的连接点，这是你将会用到的Spring的最主要的切入点指示符。</p>
+</li>
+<li><p>within - 限定匹配特定类型的连接点（在使用Spring AOP的时候，在匹配的类型中定义的方法的执行）。</p>
+</li>
+<li><p>this - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中bean reference（Spring AOP 代理）是指定类型的实例。</p>
+</li>
+<li><p>target - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中目标对象（被代理的应用对象）是指定类型的实例。</p>
+</li>
+<li><p>args - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中参数是指定类型的实例。</p>
+</li>
+<li><p>@target - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中正执行对象的类持有指定类型的注解。</p>
+</li>
+<li><p>@args - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中实际传入参数的运行时类型持有指定类型的注解。</p>
+</li>
+<li><p>@within - 限定匹配特定的连接点，其中连接点所在类型已指定注解（在使用Spring AOP的时候，所执行的方法所在类型已指定注解）。</p>
+</li>
+<li><p>@annotation - 限定匹配特定的连接点（使用Spring AOP的时候方法的执行），其中连接点的主题持有指定的注解。</p>
+</li>
+</ul>
+<blockquote>
+<p>其中execution使用最频繁，即某方法执行时进行切入。定义切入点中有一个重要的知识，即切入点表达式，我们一会在解释怎么写切入点表达式。</p>
+</blockquote>
+<h2><span id="spring-aop支持的通知">spring aop支持的通知：</span></h2><ul>
+<li><p>@Before：前置通知：在某连接点之前执行的通知，但这个通知不能阻止连接点之前的执行流程（除非它抛出一个异常）。</p>
+</li>
+<li><p>@AfterReturning ：后置通知：在某连接点正常完成后执行的通知，通常在一个匹配的方法返回的时候执行。</p>
+</li>
+</ul>
+<p>可以在后置通知中绑定返回值，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterReturning</span>（</span><br><span class="line">    pointcut=com.test.service.CacheDemoService.findById(..))<span class="string">",</span></span><br><span class="line"><span class="string">    returning="</span>retVal<span class="string">"）</span></span><br><span class="line"><span class="string">  public void doFindByIdCheck（Object retVal） &#123;</span></span><br><span class="line"><span class="string">    // ...</span></span><br><span class="line"><span class="string">  &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>@AfterThrowing:异常通知：在方法抛出异常退出时执行的通知。　　　　　　　</p>
+</li>
+<li><p>@After 最终通知。当某连接点退出的时候执行的通知（不论是正常返回还是异常退出）。</p>
+</li>
+<li><p>@Around：环绕通知：包围一个连接点的通知，如方法调用。这是最强大的一种通知类型。环绕通知可以在方法调用前后完成自定义的行为。它也会选择是否继续执行连接点或直接返回它自己的返回值或抛出异常来结束执行。</p>
+</li>
+</ul>
+<blockquote>
+<p>环绕通知最麻烦，也最强大，其是一个对方法的环绕，具体方法会通过代理传递到切面中去，切面中可选择执行方法与否，执行方法几次等。</p>
+</blockquote>
+<blockquote>
+<p>环绕通知使用一个代理ProceedingJoinPoint类型的对象来管理目标对象，所以此通知的第一个参数必须是ProceedingJoinPoint类型，在通知体内，调用ProceedingJoinPoint的proceed()方法会导致后台的连接点方法执行。proceed 方法也可能会被调用并且传入一个Object[]对象-该数组中的值将被作为方法执行时的参数。</p>
+</blockquote>
+<h2><span id="切入点表达式">切入点表达式</span></h2><p>切入点表达式的格式：execution([可见性] 返回类型 [声明类型].方法名(参数) [异常])</p>
+<p>其中【】中的为可选，其他的还支持通配符的使用:</p>
+<p>*：匹配所有字符<br>..：一般用于匹配多个包，多个参数<br>+：表示类及其子类</p>
+<p>运算符有：&amp;&amp;、||、!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">* execution：用于匹配子表达式。</span><br><span class="line">//匹配com.cjm.model包及其子包中所有类中的所有方法，返回类型任意，方法参数任意</span><br><span class="line">@Pointcut(&quot;execution(* com.cjm.model..*.*(..))&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"></span><br><span class="line">* within：用于匹配连接点所在的Java类或者包。</span><br><span class="line">//匹配Person类中的所有方法</span><br><span class="line">@Pointcut(&quot;within(com.cjm.model.Person)&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line">            </span><br><span class="line">//匹配com.cjm包及其子包中所有类中的所有方法</span><br><span class="line">@Pointcut(&quot;within(com.cjm..*)&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"></span><br><span class="line">* this：用于向通知方法中传入代理对象的引用。</span><br><span class="line">@Before(&quot;before() &amp;&amp; this(proxy)&quot;)</span><br><span class="line">public void beforeAdvide(JoinPoint point, Object proxy)&#123;</span><br><span class="line">   //处理逻辑</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* target：用于向通知方法中传入目标对象的引用。</span><br><span class="line">@Before(&quot;before() &amp;&amp; target(target)</span><br><span class="line">public void beforeAdvide(JoinPoint point, Object proxy)&#123;</span><br><span class="line">   //处理逻辑</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* args：用于将参数传入到通知方法中。</span><br><span class="line">@Before(&quot;before() &amp;&amp; args(age,username)&quot;)</span><br><span class="line">public void beforeAdvide(JoinPoint point, int age, String username)&#123;</span><br><span class="line">   //处理逻辑</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">* @within ：用于匹配在类一级使用了参数确定的注解的类，其所有方法都将被匹配。 </span><br><span class="line">@Pointcut(&quot;@within(com.cjm.annotation.AdviceAnnotation)&quot;)</span><br><span class="line">//所有被@AdviceAnnotation标注的类都将匹配</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"></span><br><span class="line">* @target ：和@within的功能类似，但必须要指定注解接口的保留策略为RUNTIME。 @Pointcut(&quot;@target(com.cjm.annotation.AdviceAnnotation)&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"></span><br><span class="line">* @args ：传入连接点的对象对应的Java类必须被@args指定的Annotation注解标注。   @Before(&quot;@args(com.cjm.annotation.AdviceAnnotation)&quot;)</span><br><span class="line">public void beforeAdvide(JoinPoint point)&#123;</span><br><span class="line">   //处理逻辑</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* @annotation ：匹配连接点被它参数指定的Annotation注解的方法。也就是说，所有被指定注解标注的方法都将匹配。</span><br><span class="line">@Pointcut(&quot;@annotation(com.cjm.annotation.AdviceAnnotation)&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br><span class="line"></span><br><span class="line">* bean：通过受管Bean的名字来限定连接点所在的Bean。该关键词是Spring2.5新增的。</span><br><span class="line">@Pointcut(&quot;bean(person)&quot;)</span><br><span class="line">public void before()&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="准备工作">准备工作</span></h2><p>因为需要对web请求做切面来记录日志，所以先引入web模块，并创建一个简单的hello请求的处理。</p>
+<ul>
+<li>pom.xml 中引入aop模块</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>或者gradle.build 引入</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile(&quot;org.springframework.boot:spring-boot-starter-aop&quot;)</span><br></pre></td></tr></table></figure>
+<p>在完成了引入AOP依赖包后，一般来说并不需要去做其他配置。也许在Spring中使用过注解配置方式的人会问是否需要在程序主类中增加 @EnableAspectJAutoProxy 来启用，实际并不需要。</p>
+<p>可以看下面关于AOP的默认配置属性，其中 spring.aop.auto 属性默认是开启的，也就是说只要引入了AOP依赖后，默认已经增加了 @EnableAspectJAutoProxy 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># AOP</span><br><span class="line">spring.aop.auto=true # Add @EnableAspectJAutoProxy.  </span><br><span class="line">spring.aop.proxy-target-class=false # Whether subclass-based (CGLIB) proxies are to be created (true) as  </span><br><span class="line"> opposed to standard Java interface-based proxies (false).</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>而当我们需要使用CGLIB来实现AOP的时候，需要配置 spring.aop.proxy-target-class=true ，不然默认使用的是标准Java的实现。</p>
+</blockquote>
+<h2><span id="aop方法">AOP方法</span></h2><p>实现AOP的切面主要有以下几个要素：</p>
+<ul>
+<li>使用 @Aspect 注解将一个java类定义为切面类</li>
+<li>使用 @Pointcut 定义一个切入点，可以是一个规则表达式，比如下例中某个package下的所有函数，也可以是一个注解等。</li>
+<li>根据需要在切入点不同位置的切入内容<ul>
+<li>使用 @Before 在切入点开始处切入内容</li>
+<li>使用 @After 在切入点结尾处切入内容</li>
+<li>使用 @AfterReturning 在切入点return内容之后切入内容（可以用来对处理返回值做一些加工处理）</li>
+<li>使用 @Around 在切入点前后切入内容，并自己控制何时执行切入点自身的内容</li>
+<li>使用 @AfterThrowing 用来处理当切入内容部分抛出异常之后的处理逻辑</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebLogAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Logger logger = Logger.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(public * com.didispace.web..*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">webLog</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"webLog()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBefore</span><span class="params">(JoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">// 接收到请求，记录请求内容</span></span><br><span class="line">        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();</span><br><span class="line">        HttpServletRequest request = attributes.getRequest();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录下请求内容</span></span><br><span class="line">        logger.info(<span class="string">"URL : "</span> + request.getRequestURL().toString());</span><br><span class="line">        logger.info(<span class="string">"HTTP_METHOD : "</span> + request.getMethod());</span><br><span class="line">        logger.info(<span class="string">"IP : "</span> + request.getRemoteAddr());</span><br><span class="line">        logger.info(<span class="string">"CLASS_METHOD : "</span> + joinPoint.getSignature().getDeclaringTypeName() + <span class="string">"."</span> + joinPoint.getSignature().getName());</span><br><span class="line">        logger.info(<span class="string">"ARGS : "</span> + Arrays.toString(joinPoint.getArgs()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(returning = <span class="string">"ret"</span>, pointcut = <span class="string">"webLog()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAfterReturning</span><span class="params">(Object ret)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">// 处理完请求，返回内容</span></span><br><span class="line">        logger.info(<span class="string">"RESPONSE : "</span> + ret);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">可以看上面的例子，通过 <span class="meta">@Pointcut</span> 定义的切入点为 com.didispace.web 包下的所有函数（对web层所有请求处理做切入点），然后通过 <span class="meta">@Before</span> 实现，对请求内容的日志记录（本文只是说明过程，可以根据需要调整内容），最后通过 <span class="meta">@AfterReturning</span> 记录请求返回的对象。</span><br><span class="line"></span><br><span class="line">通过运行程序并访问： http:<span class="comment">//localhost:8080/hello?name=didi ，可以获得下面的日志输出</span></span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">156</span>  INFO WebLogAspect:<span class="number">41</span> - URL : http:<span class="comment">//localhost:8080/hello  </span></span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">156</span>  INFO WebLogAspect:<span class="number">42</span> - HTTP_METHOD : http:<span class="comment">//localhost:8080/hello  </span></span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">157</span>  INFO WebLogAspect:<span class="number">43</span> - IP : <span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">0</span>:<span class="number">1</span>  </span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">160</span>  INFO WebLogAspect:<span class="number">44</span> - CLASS_METHOD : com.didispace.web.HelloController.hello  </span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">160</span>  INFO WebLogAspect:<span class="number">45</span> - ARGS : [didi]  </span><br><span class="line"><span class="number">2016</span>-<span class="number">05</span>-<span class="number">19</span> <span class="number">13</span>:<span class="number">42</span>:<span class="number">13</span>,<span class="number">170</span>  INFO WebLogAspect:<span class="number">52</span> - RESPONSE:Hello didi</span><br></pre></td></tr></table></figure>
+<h2><span id="优化aop切面中的同步问题">优化：AOP切面中的同步问题</span></h2><p>在WebLogAspect切面中，分别通过doBefore和doAfterReturning两个独立函数实现了切点头部和切点返回后执行的内容，若我们想统计请求的处理时间，就需要在doBefore处记录时间，并在doAfterReturning处通过当前时间与开始处记录的时间计算得到请求处理的消耗时间。</p>
+<p>那么我们是否可以在WebLogAspect切面中定义一个成员变量来给doBefore和doAfterReturning一起访问呢？是否会有同步问题呢？</p>
+<p>的确，直接在这里定义基本类型会有同步问题，所以我们可以引入ThreadLocal对象，像下面这样进行记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Aspect</span><br><span class="line">@Component</span><br><span class="line">public class WebLogAspect &#123;</span><br><span class="line"></span><br><span class="line">    private Logger logger = Logger.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    ThreadLocal&lt;Long&gt; startTime = new ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    @Pointcut(&quot;execution(public * com.didispace.web..*.*(..))&quot;)</span><br><span class="line">    public void webLog()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    @Before(&quot;webLog()&quot;)</span><br><span class="line">    public void doBefore(JoinPoint joinPoint) throws Throwable &#123;</span><br><span class="line">        startTime.set(System.currentTimeMillis());</span><br><span class="line"></span><br><span class="line">        // 省略日志记录内容</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @AfterReturning(returning = &quot;ret&quot;, pointcut = &quot;webLog()&quot;)</span><br><span class="line">    public void doAfterReturning(Object ret) throws Throwable &#123;</span><br><span class="line">        // 处理完请求，返回内容</span><br><span class="line">        logger.info(&quot;RESPONSE : &quot; + ret);</span><br><span class="line">        logger.info(&quot;SPEND TIME : &quot; + (System.currentTimeMillis() - startTime.get()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="优化aop切面的优先级">优化：AOP切面的优先级</span></h2><p>由于通过AOP实现，程序得到了很好的解耦，但是也会带来一些问题，比如：我们可能会对Web层做多个切面，校验用户，校验头信息等等，这个时候经常会碰到切面的处理顺序问题。</p>
+<p>所以，我们需要定义每个切面的优先级，我们需要 @Order(i) 注解来标识切面的优先级。 i的值越小，优先级越高 。假设我们还有一个切面是 CheckNameAspect 用来校验name必须为didi，我们为其设置 @Order(10) ，而上文中WebLogAspect设置为 @Order(5) ，所以WebLogAspect有更高的优先级，这个时候执行顺序是这样的：</p>
+<ul>
+<li>在 @Before 中优先执行 @Order(5) 的内容，再执行 @Order(10) 的内容</li>
+<li><p>在 @After 和 @AfterReturning 中优先执行 @Order(10) 的内容，再执行 @Order(5) 的内容<br>所以我们可以这样子总结：</p>
+</li>
+<li><p>在切入点前的操作，按order的值由小到大执行</p>
+</li>
+<li>在切入点后的操作，按order的值由大到小执行</li>
+</ul>
+<h2><span id="aop实现web签名验证">AOP实现web签名验证</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignatureAspect</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String secret = <span class="string">"test"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Logger log = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(public * com.mailejifen.msg.controllers..*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">signatureVerification</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"signatureVerification()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 接收到请求，记录请求内容</span></span><br><span class="line">        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();</span><br><span class="line">        HttpServletRequest request = attributes.getRequest();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录下请求内容</span></span><br><span class="line">        log.info(<span class="string">"URL : "</span> + request.getRequestURL().toString());</span><br><span class="line">        log.info(<span class="string">"HTTP_METHOD : "</span> + request.getMethod());</span><br><span class="line">        log.info(<span class="string">"IP : "</span> + request.getRemoteAddr());</span><br><span class="line">        log.info(<span class="string">"CLASS_METHOD : "</span> + pjp.getSignature().getDeclaringTypeName() + <span class="string">"."</span> + pjp.getSignature().getName());</span><br><span class="line">        log.info(<span class="string">"ARGS : "</span> + Arrays.toString(pjp.getArgs()));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取签名</span></span><br><span class="line">        String sign= request.getParameter(<span class="string">"sign"</span>);</span><br><span class="line">        <span class="comment">//获取所有值</span></span><br><span class="line">        Object[] keys = request.getParameterMap().keySet().toArray();</span><br><span class="line">        Arrays.sort(keys);</span><br><span class="line">        String str = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">for</span> (Object key : keys) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!key.equals(<span class="string">"sign"</span>)) &#123;</span><br><span class="line">                str += request.getParameter(key.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        str += secret;</span><br><span class="line">        System.out.println(str);</span><br><span class="line">        System.out.println(DigestUtils.md5Hex(str));</span><br><span class="line">        System.out.println(sign);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断签名</span></span><br><span class="line">        <span class="keyword">if</span>(DigestUtils.md5Hex(str).equals(sign)) &#123;</span><br><span class="line">            Object result = pjp.proceed();</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> HandleResult(ErrorCode.SIGN_FAIL,ErrorCode.getErrorMsg(ErrorCode.SIGN_FAIL));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/aop/" data-id="cjopxmsr2000dwfo8z4nf3qmd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/web_xml" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/web_xml/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.384Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/mvc/web_xml/">spring mvc web.xml</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#spring-mvc-webxml">spring mvc web.xml</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="spring-mvc-webxml">spring mvc web.xml</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/mvc/web_xml/" data-id="cjopxmsr5000jwfo8ih6vlj43" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/resultful" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/resultful/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.379Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/mvc/resultful/">resultful</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#resultful">resultful</a><ul>
+<li><a href="#pomxml">pom.xml</a></li>
+<li><a href="#webxml">web.xml</a></li>
+<li><a href="#escapefigure-classhighlight-xmltabletrtd-classgutterprespan-classline1spanbrspan-classline2spanbrspan-classline3spanbrspan-classline4spanbrspan-classline5spanbrspan-classline6spanbrspan-classline7spanbrspan-classline8spanbrspan-classline9spanbrspan-classline10spanbrspan-classline11spanbrspan-classline12spanbrspan-classline13spanbrspan-classline14spanbrspan-classline15spanbrspan-classline16spanbrspan-classline17spanbrspan-classline18spanbrspan-classline19spanbrspan-classline20spanbrspan-classline21spanbrspan-classline22spanbrspan-classline23spanbrspan-classline24spanbrspan-classline25spanbrspan-classline26spanbrspan-classline27spanbrspan-classline28spanbrspan-classline29spanbrspan-classline30spanbrspan-classline31spanbrspan-classline32spanbrspan-classline33spanbrspan-classline34spanbrspan-classline35spanbrspan-classline36spanbrspan-classline37spanbrspan-classline38spanbrspan-classline39spanbrspan-classline40spanbrspan-classline41spanbrspan-classline42spanbrspan-classline43spanbrspan-classline44spanbrpretdtd-classcodeprespan-classlinespan-classmetaltxml-version10-encodingutf-8gtspanspanbrspan-classlinespan-classtagltspan-classnamebeansspan-span-classattrdefault-lazy-initspanspan-classstringtruespanspanspanbrspan-classlinespan-classtag-span-classattrxmlnsspanspan-classstringhttpwwwspringframeworkorgschemabeansspan-span-classattrxmlnspspanspan-classstringhttpwwwspringframeworkorgschemapspanspanspanbrspan-classlinespan-classtag-span-classattrxmlnsxsispanspan-classstringhttpwwww3org2001xmlschema-instancespan-span-classattrxmlnscontextspanspan-classstringhttpwwwspringframeworkorgschemacontextspanspanspanbrspan-classlinespan-classtag-span-classattrxmlnsmvcspanspan-classstringhttpwwwspringframeworkorgschemamvcspanspanspanbrspan-classlinespan-classtag-span-classattrxsischemalocationspanspan-classstringspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemabeansspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemabeansspring-beans-31xsdspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemamvcspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemamvcspring-mvc-31xsdspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemacontextspanspanspanbrspan-classlinespan-classtagspan-classstring-httpwwwspringframeworkorgschemacontextspring-context-31xsdspangtspanspanbrspan-classlinespanbrspan-classline-span-classcommentlt-注解驱动-gtspanspanbrspan-classline-span-classtagltspan-classnamemvcannotation-drivenspan-gtspanspanbrspan-classlinespanbrspan-classline-span-classcommentlt-扫描包-gtspanspanbrspan-classline-span-classtagltspan-classnamecontextcomponent-scanspan-span-classattrbase-packagespanspan-classstringcommailejifenoauthcontrollersspan-gtspanspanbrspan-classlinespanbrspan-classline-span-classtagltspan-classnamebeanspan-span-classattrclassspanspan-classstringorgspringframeworkwebservletmvcmethodannotationrequestmappinghandlermappingspan-gtspanspanbrspan-classline-span-classtagltspan-classnamebeanspan-span-classattrclassspanspan-classstringorgspringframeworkwebservletmvcmethodannotationrequestmappinghandleradapterspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspan-span-classattrnamespanspan-classstringmessageconvertersspangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamebeanspan-span-classattrclassspanspan-classstringorgspringframeworkhttpconverterstringhttpmessageconverterspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspan-span-classattrnamespanspan-classstringsupportedmediatypesspangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamevaluespangtspantexthtml-charsetutf-8span-classtagltspan-classnamevaluespangtspanspanbrspan-classline-span-classtagltspan-classnamevaluespangtspanapplicationjsoncharsetutf-8span-classtagltspan-classnamevaluespangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspangtspanspanbrspan-classline-span-classtagltspan-classnamebeanspangtspanspanbrspan-classline-span-classtagltspan-classnamebeanspan-span-classattrclassspanspan-classstringorgspringframeworkhttpconverterjsonmappingjackson2httpmessageconverterspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspan-span-classattrnamespanspan-classstringsupportedmediatypesspangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamevaluespangtspantexthtml-charsetutf-8span-classtagltspan-classnamevaluespangtspanspanbrspan-classline-span-classtagltspan-classnamevaluespangtspanapplicationjsoncharsetutf-8span-classtagltspan-classnamevaluespangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspangtspanspanbrspan-classline-span-classtagltspan-classnamebeanspangtspanspanbrspan-classline-span-classtagltspan-classnamelistspangtspanspanbrspan-classline-span-classtagltspan-classnamepropertyspangtspanspanbrspan-classline-span-classtagltspan-classnamebeanspangtspanspanbrspan-classlinespanbrspan-classlinespan-classtagltspan-classnamebeansspangtspanspanbrpretdtrtablefigureescape"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-lazy-init</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span> <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context/spring-context-3.1.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 注解驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 扫描包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.mailejifen.oauth.controllers"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageConverters"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="resultful">resultful</span></h1><h2><span id="pomxml">pom.xml</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.jackson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-mapper-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="webxml">web.xml</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>auth<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springMVC-servlet.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>springMVC-servlet.xml</p>
+<h2><span id="1234567891011121314151617181920212223242526272829303132333435363738394041424344ltxml-version10-encodingutf-8gtltbeans-default-lazy-inittrue-xmlnshttpwwwspringframeworkorgschemabeans-xmlnsphttpwwwspringframeworkorgschemap-xmlnsxsihttpwwww3org2001xmlschema-instance-xmlnscontexthttpwwwspringframeworkorgschemacontext-xmlnsmvchttpwwwspringframeworkorgschemamvc-xsischemalocation-httpwwwspringframeworkorgschemabeans-httpwwwspringframeworkorgschemabeansspring-beans-31xsd-httpwwwspringframeworkorgschemamvc-httpwwwspringframeworkorgschemamvcspring-mvc-31xsd-httpwwwspringframeworkorgschemacontext-httpwwwspringframeworkorgschemacontextspring-context-31xsdgt-lt-注解驱动-gt-ltmvcannotation-driven-gt-lt-扫描包-gt-ltcontextcomponent-scan-base-packagecommailejifenoauthcontrollers-gt-ltbean-classorgspringframeworkwebservletmvcmethodannotationrequestmappinghandlermapping-gt-ltbean-classorgspringframeworkwebservletmvcmethodannotationrequestmappinghandleradaptergt-ltproperty-namemessageconvertersgt-ltlistgt-ltbean-classorgspringframeworkhttpconverterstringhttpmessageconvertergt-ltproperty-namesupportedmediatypesgt-ltlistgt-ltvaluegttexthtml-charsetutf-8ltvaluegt-ltvaluegtapplicationjsoncharsetutf-8ltvaluegt-ltlistgt-ltpropertygt-ltbeangt-ltbean-classorgspringframeworkhttpconverterjsonmappingjackson2httpmessageconvertergt-ltproperty-namesupportedmediatypesgt-ltlistgt-ltvaluegttexthtml-charsetutf-8ltvaluegt-ltvaluegtapplicationjsoncharsetutf-8ltvaluegt-ltlistgt-ltpropertygt-ltbeangt-ltlistgt-ltpropertygt-ltbeangtltbeansgt"><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-lazy-init</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span> <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/context/spring-context-3.1.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 注解驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 扫描包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.mailejifen.oauth.controllers"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageConverters"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>text/html; charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/mvc/resultful/" data-id="cjopxmsr5000iwfo8q09pquu4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/log4j2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/log4j2/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.375Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/mvc/log4j2/">log4j2 与 spring mvc整合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#log4j2-与-spring-mvc整合">log4j2 与 spring mvc整合</a><ul>
+<li><a href="#maven依赖">maven依赖</a></li>
+<li><a href="#演示代码">演示代码</a></li>
+<li><a href="#默认配置">默认配置</a></li>
+<li><a href="#文件记录日志">文件记录日志</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="log4j2-与-spring-mvc整合">log4j2 与 spring mvc整合</span></h1><h2><span id="maven依赖">maven依赖</span></h2><p>我用的log4j.version = 2.6.2<br>spring.version = 4.3.1.RELEASE</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core --&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-api&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-core&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;log4j-web&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;$&#123;log4j.version&#125;&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2><span id="演示代码">演示代码</span></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Logger logger = LogManager.getLogger(<span class="keyword">this</span>.getClass());</span><br><span class="line"></span><br><span class="line">ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();</span><br><span class="line">        HttpServletRequest request = attributes.getRequest();</span><br><span class="line"></span><br><span class="line">        logger.info(<span class="string">"URL : "</span> + request.getRequestURL().toString());</span><br><span class="line">        logger.info(<span class="string">"HTTP_METHOD : "</span> + request.getMethod());</span><br><span class="line">        logger.info(<span class="string">"IP : "</span> + request.getRemoteAddr());</span><br><span class="line">        logger.info(<span class="string">"CLASS_METHOD : "</span> + pjp.getSignature().getDeclaringTypeName() + <span class="string">"."</span> + pjp.getSignature().getName());</span><br><span class="line">        logger.info(<span class="string">"ARGS : "</span> + Arrays.toString(pjp.getArgs()));</span><br></pre></td></tr></table></figure>
+<h2><span id="默认配置">默认配置</span></h2><p>在没有任何配置的情况下，log4j2会使用默认配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;Configuration status=&quot;WARN&quot;&gt;</span><br><span class="line">    &lt;Appenders&gt;</span><br><span class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot; /&gt;</span><br><span class="line">        &lt;/Console&gt;</span><br><span class="line">    &lt;/Appenders&gt;</span><br><span class="line">    &lt;Loggers&gt;</span><br><span class="line">        &lt;Root level=&quot;error&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;Console&quot; /&gt;</span><br><span class="line">        &lt;/Root&gt;</span><br><span class="line">    &lt;/Loggers&gt;</span><br><span class="line">&lt;/Configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>该配置只有一个Appender：Console，目标是SYSTEM_OUT，即日志内容，都会打印在eclipse控制台上。Root Logger的级别是error，即：所有error及以上级别的日志才会记录。(注：日志级别顺序为 TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL )，所以最终只有2日志会输出(error,fatal)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 13:07:56.099 [main] ERROR  - error message</span><br><span class="line">2 13:07:56.100 [main] FATAL  - fatal message</span><br><span class="line">3 Hello World!</span><br></pre></td></tr></table></figure>
+<p>配置第1行中的status=”WARN”，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF，设置成“WARN”指：所有log4j2的event信息中，只有WARN及以上级别的信息才记录，大家可以把它改成TRACE试试(最低级别)，看下输出内容有何变化。</p>
+<p>另：配置文件通常命名为log4j2.xml，运行时只要在classpath下能找到即可。</p>
+<h2><span id="文件记录日志">文件记录日志</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!-- log4j2使用说明（create By SeanXiao    ）：</span><br><span class="line">使用方式如下：</span><br><span class="line">private static final Logger logger = LogManager.getLogger(实际类名.class.getName());</span><br><span class="line"></span><br><span class="line">2、日志说明：</span><br><span class="line">（1）请根据实际情况配置各项参数</span><br><span class="line">（2）需要注意日志文件备份数和日志文件大小，注意预留目录空间</span><br><span class="line">（3）实际部署的时候backupFilePatch变量需要修改成linux目录</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;configuration status=&quot;error&quot; monitorInterval=&quot;1800&quot;&gt;</span><br><span class="line">    &lt;Properties&gt;</span><br><span class="line">        &lt;Property name=&quot;fileName&quot;&gt;oauth.mailejifen.com.log&lt;/Property&gt;</span><br><span class="line">        &lt;Property name=&quot;backupFilePatch&quot;&gt;/usr/local/logs/java/&lt;/Property&gt;</span><br><span class="line">    &lt;/Properties&gt;</span><br><span class="line">    &lt;!--先定义所有的appender--&gt;</span><br><span class="line">    &lt;appenders&gt;</span><br><span class="line">        &lt;!--这个输出控制台的配置--&gt;</span><br><span class="line">        &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;</span><br><span class="line">            &lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span><br><span class="line">            &lt;ThresholdFilter level=&quot;trace&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot; /&gt;</span><br><span class="line">            &lt;!--这个都知道是输出日志的格式--&gt;</span><br><span class="line">            &lt;PatternLayout pattern=&quot;%d&#123;HH:mm:ss.SSS&#125; %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot; /&gt;</span><br><span class="line">        &lt;/Console&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档--&gt;</span><br><span class="line">        &lt;RollingFile name=&quot;RollingFile&quot; fileName=&quot;$&#123;backupFilePatch&#125;$&#123;fileName&#125;&quot;</span><br><span class="line">                     filePattern=&quot;$&#123;backupFilePatch&#125;$$&#123;date:yyyy-MM&#125;/app-%d&#123;yyyyMMddHHmmssSSS&#125;.log.gz&quot;&gt;</span><br><span class="line">            &lt;PatternLayout</span><br><span class="line">                    pattern=&quot;[%d&#123;yyyy.MM.dd HH:mm:ss&#125;] %-5level %class&#123;36&#125; %L %M - %msg%xEx%n&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;!-- 日志文件大小 --&gt;</span><br><span class="line">            &lt;SizeBasedTriggeringPolicy size=&quot;20MB&quot; /&gt;</span><br><span class="line">            &lt;!-- 最多保留文件数 --&gt;</span><br><span class="line">            &lt;DefaultRolloverStrategy max=&quot;20&quot;/&gt;</span><br><span class="line">        &lt;/RollingFile&gt;</span><br><span class="line">    &lt;/appenders&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--然后定义logger，只有定义了logger并引入的appender，appender才会生效--&gt;</span><br><span class="line">    &lt;loggers&gt;</span><br><span class="line">        &lt;!--建立一个默认的root的logger--&gt;</span><br><span class="line">        &lt;Logger name=&quot;com.mailejifen.oauth&quot; level=&quot;trace&quot;</span><br><span class="line">                additivity=&quot;true&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;RollingFile&quot; /&gt;</span><br><span class="line">        &lt;/Logger&gt;</span><br><span class="line">        &lt;Root level=&quot;error&quot;&gt;</span><br><span class="line">            &lt;AppenderRef ref=&quot;Console&quot; /&gt;</span><br><span class="line">        &lt;/Root&gt;</span><br><span class="line">    &lt;/loggers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>configuration中的 monitorInterval=”1800” 指log4j2每隔1800秒（半小时），自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置（很不错的功能！）</p>
+<p>Properties定义了一些属性（可以根据需要自己随便添加），主要是为了后面引用起来方便</p>
+<p>RollingFile 即表示以文件方式记录，注意一下filePattern 的设置，它与20行的SizeBasedTriggeringPolicy （表示单个文件最大多少容量）结合在一起，非常有用，以这段配置为例，当单个文件达到10M后，会自动将以前的内容，先创建类似 2014-09（年-月）的目录，然后按 “xxx-年-月-日-序号”命名，打成压缩包（很体贴的设计，即省了空间，又不丢失以前的日志信息）</p>
+<p>定义了一个新logger，它的级别是trace ，使用文件方式来记录日志，additivity=”true” 这里注意一下，因为下面还有一个root logger，任何其它的logger最终都相当于继承自root logger，所以“com.cnblogs.yjmyzz.App2”这个logger中，如果记录了error及以上级别的日志，除了文件里会记录外，root logger也会生效，即：控制台也会输出一次。如果把additivity=”true” 中的true，改成false，root logger就不会再起作用，即只会记录在文件里，控制台无输出。</p>
+<p>附录：log4j2官方pdf文档<br><a href="http://logging.apache.org/log4j/2.x/log4j-users-guide.pdf" target="_blank" rel="noopener">http://logging.apache.org/log4j/2.x/log4j-users-guide.pdf</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/mvc/log4j2/" data-id="cjopxmsr4000hwfo8mgfj1zoo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/exceptionHandler" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/exceptionHandler/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.370Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/mvc/exceptionHandler/">Spring MVC中异常处理的类体系结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#spring-mvc中异常处理的类体系结构">Spring MVC中异常处理的类体系结构</a><ul>
+<li><a href="#defaulthandlerexceptionresolver">DefaultHandlerExceptionResolver</a></li>
+<li><a href="#responsestatusexceptionresolver">ResponseStatusExceptionResolver</a></li>
+<li><a href="#annotationmethodhandlerexceptionresolver和exceptionhandlerexceptionresolver">AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver</a></li>
+<li><a href="#simplemappingexceptionresolver">SimpleMappingExceptionResolver</a></li>
+<li><a href="#自定义exceptionresolver">自定义ExceptionResolver</a><ul>
+<li><a href="#spring-mvc是如何创建和使用这些resolver的">Spring MVC是如何创建和使用这些Resolver的？</a></li>
+<li><a href="#何时该使用何种exceptionresolver">何时该使用何种ExceptionResolver？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="spring-mvc中异常处理的类体系结构">Spring MVC中异常处理的类体系结构</span></h1><p>下图展示异常处理的相关的主要类和接口</p>
+<p><img src="img/SpringMVCExceptionResolver.png" alt="alt"></p>
+<p>在Spring MVC中，所有用于处理在请求映射和请求处理过程中抛出的异常的类，都要实现HandlerExceptionResolver接口。AbstractHandlerExceptionResolver实现该接口和Orderd接口，是HandlerExceptionResolver类的实现的基类。ResponseStatusExceptionResolver等具体的异常处理类均在AbstractHandlerExceptionResolver之上，实现了具体的异常处理方式。一个基于Spring MVC的Web应用程序中，可以存在多个实现了HandlerExceptionResolver的异常处理类，他们的执行顺序，由其order属性决定, order值越小，越是优先执行, 在执行到第一个返回不是null的ModelAndView的Resolver时，不再执行后续的尚未执行的Resolver的异常处理方法。。</p>
+<p>下面我逐个介绍一下SpringMVC提供的这些异常处理类的功能。</p>
+<h3><span id="defaulthandlerexceptionresolver">DefaultHandlerExceptionResolver</span></h3><p>HandlerExceptionResolver接口的默认实现，基本上是Spring MVC内部使用，用来处理Spring定义的各种标准异常，将其转化为相对应的HTTP Status Code。其处理的异常类型有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">handleNoSuchRequestHandlingMethod</span><br><span class="line">handleHttpRequestMethodNotSupported</span><br><span class="line">handleHttpMediaTypeNotSupported</span><br><span class="line">handleMissingServletRequestParameter</span><br><span class="line">handleServletRequestBindingException</span><br><span class="line">handleTypeMismatch</span><br><span class="line">handleHttpMessageNotReadable</span><br><span class="line">handleHttpMessageNotWritable</span><br><span class="line">handleMethodArgumentNotValidException</span><br><span class="line">handleMissingServletRequestParameter</span><br><span class="line">handleMissingServletRequestPartException</span><br><span class="line">handleBindException</span><br></pre></td></tr></table></figure>
+<h3><span id="responsestatusexceptionresolver">ResponseStatusExceptionResolver</span></h3><p>用来支持ResponseStatus的使用，处理使用了ResponseStatus注解的异常，根据注解的内容，返回相应的HTTP Status Code和内容给客户端。如果Web应用程序中配置了ResponseStatusExceptionResolver，那么我们就可以使用ResponseStatus注解来注解我们自己编写的异常类，并在Controller中抛出该异常类，之后ResponseStatusExceptionResolver就会自动帮我们处理剩下的工作。</p>
+<p>这是一个自己编写的异常，用来表示订单不存在：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseStatus</span>(value=HttpStatus.NOT_FOUND, reason=<span class="string">"No such Order"</span>)  <span class="comment">// 404</span></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderNotFoundException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</span><br><span class="line">       <span class="comment">// ...</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个使用该异常的Controller方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/orders/&#123;id&#125;"</span>, method=GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showOrder</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">long</span> id, Model model) </span>&#123;</span><br><span class="line">        Order order = orderRepository.findOrderById(id);</span><br><span class="line">        <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> OrderNotFoundException(id);</span><br><span class="line">        model.addAttribute(order);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"orderDetail"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这样，当OrderNotFoundException被抛出时，ResponseStatusExceptionResolver会返回给客户端一个HTTP Status Code为404的响应。</p>
+<h3><span id="annotationmethodhandlerexceptionresolver和exceptionhandlerexceptionresolver">AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver</span></h3><p>用来支持ExceptionHandler注解，使用被ExceptionHandler注解所标记的方法来处理异常。其中AnnotationMethodHandlerExceptionResolver在3.0版本中开始提供，ExceptionHandlerExceptionResolver在3.1版本中开始提供，从3.2版本开始，Spring推荐使用ExceptionHandlerExceptionResolver。<br>如果配置了AnnotationMethodHandlerExceptionResolver和ExceptionHandlerExceptionResolver这两个异常处理bean之一，那么我们就可以使用ExceptionHandler注解来处理异常。</p>
+<p>下面是几个ExceptionHandler注解的使用例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandlingController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// @RequestHandler methods</span></span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 以下是异常处理方法</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 将DataIntegrityViolationException转化为Http Status Code为409的响应</span></span><br><span class="line">  <span class="meta">@ResponseStatus</span>(value=HttpStatus.CONFLICT, reason=<span class="string">"Data integrity violation"</span>)  <span class="comment">// 409</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(DataIntegrityViolationException.class)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">conflict</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nothing to do</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 针对SQLException和DataAccessException返回视图databaseError</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(&#123;SQLException.class,DataAccessException.class&#125;)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">databaseError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Nothing to do.  Returns the logical view name of an error page, passed to</span></span><br><span class="line">    <span class="comment">// the view-resolver(s) in usual way.</span></span><br><span class="line">    <span class="comment">// Note that the exception is _not_ available to this view (it is not added to</span></span><br><span class="line">    <span class="comment">// the model) but see "Extending ExceptionHandlerExceptionResolver" below.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"databaseError"</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建ModleAndView，将异常和请求的信息放入到Model中，指定视图名字，并返回该ModleAndView</span></span><br><span class="line">  <span class="meta">@ExceptionHandler</span>(Exception.class)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleError</span><span class="params">(HttpServletRequest req, Exception exception)</span> </span>&#123;</span><br><span class="line">    logger.error(<span class="string">"Request: "</span> + req.getRequestURL() + <span class="string">" raised "</span> + exception);</span><br><span class="line"></span><br><span class="line">    ModelAndView mav = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">    mav.addObject(<span class="string">"exception"</span>, exception);</span><br><span class="line">    mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</span><br><span class="line">    mav.setViewName(<span class="string">"error"</span>);</span><br><span class="line">    <span class="keyword">return</span> mav;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，上面例子中的ExceptionHandler方法的作用域，只是在本Controller类中。如果需要使用ExceptionHandler来处理全局的Exception，则需要使用ControllerAdvice注解。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GlobalDefaultExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_ERROR_VIEW = <span class="string">"error"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ExceptionHandler</span>(value = Exception.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">defaultErrorHandler</span><span class="params">(HttpServletRequest req, Exception e)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 如果异常使用了ResponseStatus注解，那么重新抛出该异常，Spring框架会处理该异常。 </span></span><br><span class="line">        <span class="keyword">if</span> (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 否则创建ModleAndView，处理该异常。</span></span><br><span class="line">        ModelAndView mav = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">        mav.addObject(<span class="string">"exception"</span>, e);</span><br><span class="line">        mav.addObject(<span class="string">"url"</span>, req.getRequestURL());</span><br><span class="line">        mav.setViewName(DEFAULT_ERROR_VIEW);</span><br><span class="line">        <span class="keyword">return</span> mav;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="simplemappingexceptionresolver">SimpleMappingExceptionResolver</span></h3><p>提供了将异常映射为视图的能力，高度可定制化。其提供的能力有：</p>
+<ol>
+<li>根据异常的类型，将异常映射到视图；</li>
+<li>可以为不符合处理条件没有被处理的异常，指定一个默认的错误返回；</li>
+<li>处理异常时，记录log信息；</li>
+<li>指定需要添加到Modle中的Exception属性，从而在视图中展示该属性。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(name=<span class="string">"simpleMappingExceptionResolver"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SimpleMappingExceptionResolver <span class="title">createSimpleMappingExceptionResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SimpleMappingExceptionResolver r = <span class="keyword">new</span> SimpleMappingExceptionResolver();</span><br><span class="line"></span><br><span class="line">        Properties mappings = <span class="keyword">new</span> Properties();</span><br><span class="line">        mappings.setProperty(<span class="string">"DatabaseException"</span>, <span class="string">"databaseError"</span>);</span><br><span class="line">        mappings.setProperty(<span class="string">"InvalidCreditCardException"</span>, <span class="string">"creditCardError"</span>);</span><br><span class="line"></span><br><span class="line">        r.setExceptionMappings(mappings);  <span class="comment">// 默认为空</span></span><br><span class="line">        r.setDefaultErrorView(<span class="string">"error"</span>);    <span class="comment">// 默认没有</span></span><br><span class="line">        r.setExceptionAttribute(<span class="string">"ex"</span>); </span><br><span class="line">        r.setWarnLogCategory(<span class="string">"example.MvcLogger"</span>); </span><br><span class="line">        <span class="keyword">return</span> r;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="自定义exceptionresolver">自定义ExceptionResolver</span></h3><p>Spring MVC的异常处理非常的灵活，如果提供的ExceptionResolver类不能满足使用，我们可以实现自己的异常处理类。可以通过继承SimpleMappingExceptionResolver来定制Mapping的方式和能力，也可以直接继承AbstractHandlerExceptionResolver来实现其它类型的异常处理类。</p>
+<h2><span id="spring-mvc是如何创建和使用这些resolver的">Spring MVC是如何创建和使用这些Resolver的？</span></h2><p>首先看Spring MVC是怎么加载异常处理bean的。</p>
+<p>Spring MVC有两种加载异常处理类的方式，一种是根据类型，这种情况下，会加载ApplicationContext下所有实现了</p>
+<ol>
+<li>ExceptionResolver接口的bean，并根据其order属性排序，依次调用；一种是根据名字，这种情况下会加载ApplicationContext下，名字为handlerExceptionResolver的bean。</li>
+<li>不管使用那种加载方式，如果在ApplicationContext中没有找到异常处理bean，那么Spring MVC会加载默认的异常处理bean。</li>
+<li>默认的异常处理bean定义在DispatcherServlet.properties中。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.web.servlet.HandlerExceptionResolver=org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver,\</span><br><span class="line">    org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver,\</span><br><span class="line">    org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver</span><br></pre></td></tr></table></figure>
+<p>以下代码摘自ispatcherServlet，描述了异常处理类的加载过程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Initialize the HandlerMappings used by this class.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;If no HandlerMapping beans are defined in the BeanFactory for this namespace,</span></span><br><span class="line"><span class="comment"> * we default to BeanNameUrlHandlerMapping.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initHandlerMappings</span><span class="params">(ApplicationContext context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.handlerMappings = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.detectAllHandlerMappings) &#123;</span><br><span class="line">        <span class="comment">// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.</span></span><br><span class="line">        Map&lt;String, HandlerMapping&gt; matchingBeans =</span><br><span class="line">                BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, <span class="keyword">true</span>, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (!matchingBeans.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">this</span>.handlerMappings = <span class="keyword">new</span> ArrayList&lt;HandlerMapping&gt;(matchingBeans.values());</span><br><span class="line">            <span class="comment">// We keep HandlerMappings in sorted order.</span></span><br><span class="line">            OrderComparator.sort(<span class="keyword">this</span>.handlerMappings);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            HandlerMapping hm = context.getBean(HANDLER_MAPPING_BEAN_NAME, HandlerMapping.class);</span><br><span class="line">            <span class="keyword">this</span>.handlerMappings = Collections.singletonList(hm);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (NoSuchBeanDefinitionException ex) &#123;</span><br><span class="line">            <span class="comment">// Ignore, we'll add a default HandlerMapping later.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Ensure we have at least one HandlerMapping, by registering</span></span><br><span class="line">    <span class="comment">// a default HandlerMapping if no other mappings are found.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.handlerMappings == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.handlerMappings = getDefaultStrategies(context, HandlerMapping.class);</span><br><span class="line">        <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">            logger.debug(<span class="string">"No HandlerMappings found in servlet '"</span> + getServletName() + <span class="string">"': using default"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后看Spring MVC是怎么使用异常处理bean的。</p>
+<ol>
+<li>Spring MVC把请求映射和处理过程放到try catch中，捕获到异常后，使用异常处理bean进行处理。</li>
+<li>所有异常处理bean按照order属性排序，在处理过程中，遇到第一个成功处理异常的异常处理bean之后，不再调用后续的异常处理bean。</li>
+</ol>
+<p>以下代码摘自DispatcherServlet，描述了处理异常的过程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Process the actual dispatching to the handler.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;The handler will be obtained by applying the servlet's HandlerMappings in order.</span></span><br><span class="line"><span class="comment"> * The HandlerAdapter will be obtained by querying the servlet's installed HandlerAdapters</span></span><br><span class="line"><span class="comment"> * to find the first that supports the handler class.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;All HTTP methods are handled by this method. It's up to HandlerAdapters or handlers</span></span><br><span class="line"><span class="comment"> * themselves to decide which methods are acceptable.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception in case of any kind of processing failure</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doDispatch</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    HttpServletRequest processedRequest = request;</span><br><span class="line">    HandlerExecutionChain mappedHandler = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">boolean</span> multipartRequestParsed = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ModelAndView mv = <span class="keyword">null</span>;</span><br><span class="line">        Exception dispatchException = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            processedRequest = checkMultipart(request);</span><br><span class="line">            multipartRequestParsed = (processedRequest != request);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Determine handler for the current request.</span></span><br><span class="line">            mappedHandler = getHandler(processedRequest);</span><br><span class="line">            <span class="keyword">if</span> (mappedHandler == <span class="keyword">null</span> || mappedHandler.getHandler() == <span class="keyword">null</span>) &#123;</span><br><span class="line">                noHandlerFound(processedRequest, response);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Determine handler adapter for the current request.</span></span><br><span class="line">            HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Process last-modified header, if supported by the handler.</span></span><br><span class="line">            String method = request.getMethod();</span><br><span class="line">            <span class="keyword">boolean</span> isGet = <span class="string">"GET"</span>.equals(method);</span><br><span class="line">            <span class="keyword">if</span> (isGet || <span class="string">"HEAD"</span>.equals(method)) &#123;</span><br><span class="line">                <span class="keyword">long</span> lastModified = ha.getLastModified(request, mappedHandler.getHandler());</span><br><span class="line">                <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                    logger.debug(<span class="string">"Last-Modified value for ["</span> + getRequestUri(request) + <span class="string">"] is: "</span> + lastModified);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">new</span> ServletWebRequest(request, response).checkNotModified(lastModified) &amp;&amp; isGet) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!mappedHandler.applyPreHandle(processedRequest, response)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Actually invoke the handler.</span></span><br><span class="line">            mv = ha.handle(processedRequest, response, mappedHandler.getHandler());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            applyDefaultViewName(request, mv);</span><br><span class="line">            mappedHandler.applyPostHandle(processedRequest, response, mv);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            dispatchException = ex;</span><br><span class="line">        &#125;</span><br><span class="line">        processDispatchResult(processedRequest, response, mappedHandler, mv, dispatchException);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">        triggerAfterCompletion(processedRequest, response, mappedHandler, ex);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Error err) &#123;</span><br><span class="line">        triggerAfterCompletionWithError(processedRequest, response, mappedHandler, err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (asyncManager.isConcurrentHandlingStarted()) &#123;</span><br><span class="line">            <span class="comment">// Instead of postHandle and afterCompletion</span></span><br><span class="line">            <span class="keyword">if</span> (mappedHandler != <span class="keyword">null</span>) &#123;</span><br><span class="line">                mappedHandler.applyAfterConcurrentHandlingStarted(processedRequest, response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// Clean up any resources used by a multipart request.</span></span><br><span class="line">            <span class="keyword">if</span> (multipartRequestParsed) &#123;</span><br><span class="line">                cleanupMultipart(processedRequest);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine an error ModelAndView via the registered HandlerExceptionResolvers.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> request current HTTP request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> response current HTTP response</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> handler the executed handler, or &#123;<span class="doctag">@code</span> null&#125; if none chosen at the time of the exception</span></span><br><span class="line"><span class="comment"> * (for example, if multipart resolution failed)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ex the exception that got thrown during handler execution</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a corresponding ModelAndView to forward to</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception if no error ModelAndView found</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> ModelAndView <span class="title">processHandlerException</span><span class="params">(HttpServletRequest request, HttpServletResponse response,</span></span></span><br><span class="line"><span class="function"><span class="params">        Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check registered HandlerExceptionResolvers...</span></span><br><span class="line">    ModelAndView exMv = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (HandlerExceptionResolver handlerExceptionResolver : <span class="keyword">this</span>.handlerExceptionResolvers) &#123;</span><br><span class="line">        exMv = handlerExceptionResolver.resolveException(request, response, handler, ex);</span><br><span class="line">        <span class="keyword">if</span> (exMv != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (exMv != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (exMv.isEmpty()) &#123;</span><br><span class="line">            request.setAttribute(EXCEPTION_ATTRIBUTE, ex);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// We might still need view name translation for a plain error model...</span></span><br><span class="line">        <span class="keyword">if</span> (!exMv.hasView()) &#123;</span><br><span class="line">            exMv.setViewName(getDefaultViewName(request));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">            logger.debug(<span class="string">"Handler execution resulted in exception - forwarding to resolved error view: "</span> + exMv, ex);</span><br><span class="line">        &#125;</span><br><span class="line">        WebUtils.exposeErrorRequestAttributes(request, ex, getServletName());</span><br><span class="line">        <span class="keyword">return</span> exMv;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> ex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="何时该使用何种exceptionresolver">何时该使用何种ExceptionResolver？</span></h2><p>Spring提供了很多选择和非常灵活的使用方式，下面是一些使用建议：</p>
+<ol>
+<li>如果自定义异常类，考虑加上ResponseStatus注解；</li>
+<li>对于没有ResponseStatus注解的异常，可以通过使用ExceptionHandler+ControllerAdvice注解，或者通过配置SimpleMappingExceptionResolver，来为整个Web应用提供统一的异常处理。</li>
+<li>如果应用中有些异常处理方式，只针对特定的Controller使用，那么在这个Controller中使用ExceptionHandler注解。</li>
+<li>不要使用过多的异常处理方式，不然的话，维护起来会很苦恼，因为异常的处理分散在很多不同的地方。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/mvc/exceptionHandler/" data-id="cjopxmsrc000vwfo8sq9uh3af" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/mvc/aop" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/aop/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.365Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/mvc/aop/">aop开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#aop开发">aop开发</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="aop开发">aop开发</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/mvc/aop/" data-id="cjopxmsr4000gwfo8v5eglyt2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Learn-Spring/">&laquo; Prev</a><a class="page-number" href="/Learn-Spring/">1</a><span class="page-number current">2</span><a class="page-number" href="/Learn-Spring/page/3/">3</a><a class="page-number" href="/Learn-Spring/page/4/">4</a><a class="extend next" rel="next" href="/Learn-Spring/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/Learn-Spring/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Learn-Spring/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/web/Thymeleaf/README/">thymeleaf介绍</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/war/war/">spring-boot 传统部署方式</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/starter/">Spring Boot应用启动器基本的一共有44种，具体如下：</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/redis/README/">spring-boot使用redis</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/properties/">application.properties相关通用属性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Neo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Learn-Spring/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Learn-Spring/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Learn-Spring/fancybox/jquery.fancybox.css">
+  <script src="/Learn-Spring/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Learn-Spring/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

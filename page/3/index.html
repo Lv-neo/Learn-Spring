@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://lv-neo.github.io/Learn-Spring/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/Learn-Spring/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Learn-Spring/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Learn-Spring/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/">Home</a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Learn-Spring/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lv-neo.github.io/Learn-Spring"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spring/ioc_di" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/ioc_di/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.357Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/ioc_di/">IoC &amp;&amp; DI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#ioc-di">IoC &amp;&amp; DI</a><ul>
+<li><a href="#ioc">IOC</a><ul>
+<li><a href="#是什么">是什么？</a></li>
+<li><a href="#能做什么">能做什么</a></li>
+</ul>
+</li>
+<li><a href="#di">DI</a></li>
+<li><a href="#ioc和di">IOC和DI</a></li>
+<li><a href="#我对ioc和di的理解">我对IOC和DI的理解</a></li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="ioc-ampamp-di">IoC &amp;&amp; DI</span></h1><p>##前言<br>学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对Spring框架的IOC和DI的理解以及谈谈我对Ioc和DI的理解。</p>
+<ul>
+<li><a href="http://jinnianshilongnian.iteye.com/blog/1413846" target="_blank" rel="noopener">开涛的分享</a></li>
+</ul>
+<h2><span id="ioc">IOC</span></h2><h3><span id="是什么">是什么？</span></h3><p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。如何理解好Ioc呢？理解好Ioc的关键是要明确“谁控制谁，控制什么，为何是反转（有反转就应该有正转了），哪些方面反转了”，那我们来深入分析一下：</p>
+<ul>
+<li><p>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</p>
+</li>
+<li><p>为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</p>
+</li>
+</ul>
+<p>先看下传统程序设计，都是主动创建对象实例进行组装<br><img src="/img/ioc/1.jpg" alt="alt"></p>
+<p>当有了IoC/DI的容器后，在客户端类中不再主动去创建这些对象了<br><img src="/img/ioc/2.jpg" alt="alt"></p>
+<h3><span id="能做什么">能做什么</span></h3><p>　IoC 不是一种技术，只是一种思想，一个重要的面向对象编程的法则，它能指导我们如何设计出松耦合、更优良的程序。传统应用程序都是由我们在类内部主动创建依赖对象，从而导致类与类之间高耦合，难于测试；有了IoC容器后，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</p>
+<p>　　其实IoC对编程带来的最大改变不是从代码上，而是从思想上，发生了“主从换位”的变化。应用程序原本是老大，要获取什么资源都是主动出击，但是在IoC/DI思想中，应用程序就变成被动的了，被动的等待IoC容器来创建并注入它所需要的资源了。</p>
+<p>　　IoC很好的体现了面向对象设计法则之一—— 好莱坞法则：“别找我们，我们找你”；即由IoC容器帮对象找相应的依赖对象并注入，而不是由对象主动去找。</p>
+<h2><span id="di">DI</span></h2><p>DI—Dependency Injection，即“依赖注入”：组件之间依赖关系由容器在运行期决定，形象的说，即由容器动态的将某个依赖关系注入到组件之中。依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。</p>
+<p>理解DI的关键是：“谁依赖谁，为什么需要依赖，谁注入谁，注入了什么”，那我们来深入分析一下：</p>
+<p>●谁依赖于谁：当然是应用程序依赖于IoC容器；<br>●为什么需要依赖：应用程序需要IoC容器来提供对象需要的外部资源；<br>●谁注入谁：很明显是IoC容器注入应用程序某个对象，应用程序依赖的对象；<br>●注入了什么：就是注入某个对象所需要的外部资源（包括对象、资源、常量数据）。</p>
+<h2><span id="ioc和di">IOC和DI</span></h2><p>IoC和DI由什么关系呢？其实它们是同一个概念的不同角度描述，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。</p>
+<h2><span id="我对ioc和di的理解">我对IOC和DI的理解</span></h2><p>在日常的开发过程中，我们在实现某个业务场景时候，往往需要多个对象支撑业务构建，在没有使用IOC和DI的时候，我们需要在对象中使用合作对象，均通过new object()的方式动态创建出来，这个时候A要使用B就产生了强依赖，A和B产生了紧密耦合。<br>在Spring中，这一切由spring帮助我们实现，我们只需要在A中告诉spring需要一个B的connection，至于它如何构造，何时构造，A不需要知道。在系统运行时候，spring会在适当时候制造一个Connection，注入到A中。<br>这个时候所有的依赖关系都变了，全部依赖IOC容器，将以前创建对象的主动权和时机移交给IOC容器。</p>
+<h2><span id="附录">附录</span></h2><p>注：如果想要更加深入的了解IoC和DI，请参考大师级人物Martin Fowler的一篇经典文章<a href="http://www.martinfowler.com/articles/injection.html" target="_blank" rel="noopener">《Inversion of Control Containers and the Dependency Injection pattern》</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/ioc_di/" data-id="cjopxmsqv0009wfo8zv9v793l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/aop" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/aop/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.338Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/aop/">面向切面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#面向切面">面向切面</a><ul>
+<li><a href="#什么是aop">什么是AOP</a></li>
+<li><a href="#aop使用场景">AOP使用场景</a></li>
+<li><a href="#aop相关概念">AOP相关概念</a></li>
+<li><a href="#如何使用spring-aop">如何使用Spring AOP</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="面向切面">面向切面</span></h1><h3><span id="什么是aop">什么是AOP</span></h3><p>AOP（Aspect-OrientedProgramming，面向方面编程），可以说是OOP（Object-Oriented Programing，面向对象编程）的补充和完善。OOP引入封装、继承和多态性等概念来建立一种对象层次结构，用以模拟公共行为的一个集合。当我们需要为分散的对象引入公共行为的时候，OOP则显得无能为力。也就是说，OOP允许你定义从上到下的关系，但并不适合定义从左到右的关系。例如日志功能。日志代码往往水平地散布在所有对象层次中，而与它所散布到的对象的核心功能毫无关系。对于其他类型的代码，如安全性、异常处理和透明的持续性也是如此。这种散布在各处的无关的代码被称为横切（cross-cutting）代码，在OOP设计中，它导致了大量代码的重复，而不利于各个模块的重用。</p>
+<p>而AOP技术则恰恰相反，它利用一种称为“横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其名为“Aspect”，即方面。所谓“方面”，简单地说，就是将那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可操作性和可维护性。AOP代表的是一个横向的关系，如果说“对象”是一个空心的圆柱体，其中封装的是对象的属性和行为；那么面向方面编程的方法，就仿佛一把利刃，将这些空心圆柱体剖开，以获得其内部的消息。而剖开的切面，也就是所谓的“方面”了。然后它又以巧夺天功的妙手将这些剖开的切面复原，不留痕迹。</p>
+<p>使用“横切”技术，AOP把软件系统分为两个部分：核心关注点和横切关注点。业务处理的主要流程是核心关注点，与之关系不大的部分是横切关注点。横切关注点的一个特点是，他们经常发生在核心关注点的多处，而各处都基本相似。比如权限认证、日志、事务处理。Aop 的作用在于分离系统中的各种关注点，将核心关注点和横切关注点分离开来。正如Avanade公司的高级方案构架师Adam Magee所说，AOP的核心思想就是“将应用程序中的商业逻辑同对其提供支持的通用服务进行分离。”</p>
+<p>实现AOP的技术，主要分为两大类：一是采用动态代理技术，利用截取消息的方式，对该消息进行装饰，以取代原有对象行为的执行；二是采用静态织入的方式，引入特定的语法创建“方面”，从而使得编译器可以在编译期间织入有关“方面”的代码。</p>
+<h3><span id="aop使用场景">AOP使用场景</span></h3><p>AOP用来封装横切关注点，具体可以在下面的场景中使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Authentication 权限</span><br><span class="line">Caching 缓存</span><br><span class="line">Context passing 内容传递</span><br><span class="line">Error handling 错误处理</span><br><span class="line">Lazy loading　懒加载</span><br><span class="line">Debugging　　调试</span><br><span class="line">logging, tracing, profiling and monitoring　记录跟踪　优化　校准</span><br><span class="line">Performance optimization　性能优化</span><br><span class="line">Persistence　　持久化</span><br><span class="line">Resource pooling　资源池</span><br><span class="line">Synchronization　同步</span><br><span class="line">Transactions 事务</span><br></pre></td></tr></table></figure>
+<h3><span id="aop相关概念">AOP相关概念</span></h3><p>方面（Aspect）：一个关注点的模块化，这个关注点实现可能另外横切多个对象。事务管理是J2EE应用中一个很好的横切关注点例子。方面用Spring的 Advisor或拦截器实现。</p>
+<p>连接点（Joinpoint）: 程序执行过程中明确的点，如方法的调用或特定的异常被抛出。</p>
+<p>通知（Advice）: 在特定的连接点，AOP框架执行的动作。各种类型的通知包括“around”、“before”和“throws”通知。通知类型将在下面讨论。许多AOP框架包括Spring都是以拦截器做通知模型，维护一个“围绕”连接点的拦截器链。Spring中定义了四个advice: BeforeAdvice, AfterAdvice, ThrowAdvice和DynamicIntroductionAdvice</p>
+<p>切入点（Pointcut）: 指定一个通知将被引发的一系列连接点的集合。AOP框架必须允许开发者指定切入点：例如，使用正则表达式。 Spring定义了Pointcut接口，用来组合MethodMatcher和ClassFilter，可以通过名字很清楚的理解， MethodMatcher是用来检查目标类的方法是否可以被应用此通知，而ClassFilter是用来检查Pointcut是否应该应用到目标类上</p>
+<p>引入（Introduction）: 添加方法或字段到被通知的类。 Spring允许引入新的接口到任何被通知的对象。例如，你可以使用一个引入使任何对象实现 IsModified接口，来简化缓存。Spring中要使用Introduction, 可有通过DelegatingIntroductionInterceptor来实现通知，通过DefaultIntroductionAdvisor来配置Advice和代理类要实现的接口</p>
+<p>目标对象（Target Object）: 包含连接点的对象。也被称作被通知或被代理对象。POJO</p>
+<p>AOP代理（AOP Proxy）: AOP框架创建的对象，包含通知。 在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</p>
+<p>织入（Weaving）: 组装方面来创建一个被通知对象。这可以在编译时完成（例如使用AspectJ编译器），也可以在运行时完成。Spring和其他纯Java AOP框架一样，在运行时完成织入。</p>
+<p>Spring AOP组件<br><img src="/img/aop/1.png" alt="alt"></p>
+<h3><span id="如何使用spring-aop">如何使用Spring AOP</span></h3><p>可以通过配置文件或者编程的方式来使用Spring AOP。</p>
+<p>配置可以通过xml文件来进行，大概有四种方式：</p>
+<ul>
+<li>配置ProxyFactoryBean，显式地设置advisors, advice, target等</li>
+<li>配置AutoProxyCreator，这种方式下，还是如以前一样使用定义的bean，但是从容器中获得的其实已经是代理对象</li>
+<li>通过<a href="aop:config" target="_blank" rel="noopener">aop:config</a>来配置</li>
+<li>通过<a href="aop:aspectj-autoproxy" target="_blank" rel="noopener">aop:aspectj-autoproxy</a>来配置，使用AspectJ的注解来标识通知及切入点</li>
+</ul>
+<p>也可以直接使用ProxyFactory来以编程的方式使用Spring AOP，通过ProxyFactory提供的方法可以设置target对象, advisor等相关配置，最终通过 getProxy()方法来获取代理对象</p>
+<p>未完待续……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/aop/" data-id="cjopxmsqt0007wfo8b8wvx8tw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/annotate/autowired" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/annotate/autowired/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.330Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/annotate/autowired/">Autowired注解与自动装配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#autowired注解与自动装配">Autowired注解与自动装配</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="autowired注解与自动装配">Autowired注解与自动装配</span></h1><p>它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。 通过 @Autowired的使用来消除 set ，get方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/annotate/autowired/" data-id="cjopxmsr3000fwfo8si7ae9qn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/annotate/README" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/annotate/README/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.325Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/spring/annotate/README/">Spring基于Annotation的简单介绍</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#spring基于annotation的简单介绍">Spring基于Annotation的简单介绍</a></li>
+<li><a href="#前言">前言</a><ul>
+<li><a href="#注解的基本概念和原理">注解的基本概念和原理</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="spring基于annotation的简单介绍">Spring基于Annotation的简单介绍</span></h1><blockquote>
+<p>注解这个话题非常庞大，写这个文章压力也很大，生怕表达不清楚，职能稍做整理，仅供大家参考。</p>
+</blockquote>
+<h1><span id="前言">前言</span></h1><p>Spring 自 2.0 版本开始，陆续引入了一些注解用于简化 Spring 的开发。@Repository 注解便属于最先引入的一批，它用于将数据访问层 (DAO 层 ) 的类标识为 Spring Bean。具体只需将该注解标注在 DAO 类上即可。同时，为了让 Spring 能够扫描类路径中的类并识别出 @Repository 注解，需要在 XML 配置文件中启用 Bean 的自动扫描功能，这可以通过以下代码实现自动扫描。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package = &quot;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h2><span id="注解的基本概念和原理">注解的基本概念和原理</span></h2><p>注解（Annotation）提供了一种安全的类似注释的机制，为我们在代码中添加信息提供了一种形式化得方法，使我们可以在稍后某个时刻方便的使用这些数据（通过解析注解来使用这些数据），用来将任何的信息或者元数据与程序元素（类、方法、成员变量等）进行关联。其实就是更加直观更加明了的说明，这些说明信息与程序业务逻辑没有关系，并且是供指定的工具或框架使用的。Annotation像一种修饰符一样，应用于包、类型、构造方法、方法、成员变量、参数及本地变量的申明语句中。</p>
+<p>Annotation其实是一种接口。通过java的反射机制相关的API来访问Annotation信息。相关类（框架或工具中的类）根据这些信息来决定如何使用该程序元素或改变它们的行为。Java语言解释器在工作时会忽略这些Annotation，因此在JVM中这些Annotation是“不起作用”的，只能通过配套的工具才能对这些Annotation类型的信息进行访问和处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/annotate/README/" data-id="cjopxmsr3000ewfo82apbas9e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring/ApplicationContext" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/ApplicationContext/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.316Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<!-- tocstop -->
+<p>#</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/ApplicationContext/" data-id="cjopxmsqt0006wfo8q7ipdht4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hibernate/session" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/hibernate/session/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.309Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/hibernate/session/">hibernate session</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#hibernate-session">hibernate session</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="hibernate-session">hibernate session</span></h1><p><a href="http://blog.csdn.net/shrek_xu/article/details/740991" target="_blank" rel="noopener">http://blog.csdn.net/shrek_xu/article/details/740991</a><br><a href="http://www.blogjava.net/yzzh9/archive/2008/10/07/233002.html" target="_blank" rel="noopener">http://www.blogjava.net/yzzh9/archive/2008/10/07/233002.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/hibernate/session/" data-id="cjopxmsqs0005wfo8zvx55m7f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hibernate/serializable" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/hibernate/serializable/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.304Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/hibernate/serializable/">hibernate 序列化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#hibernate-序列化">hibernate 序列化</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="hibernate-序列化">hibernate 序列化</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/hibernate/serializable/" data-id="cjopxmsqr0004wfo808lvjl5z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hibernate/sequence" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/hibernate/sequence/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.299Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/hibernate/sequence/">Hibernate-sequence doesn&#39;t exist</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#hibernate-sequence-doesnt-exist">Hibernate-sequence doesn’t exist</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="hibernate-sequence-doesnt-exist">Hibernate-sequence doesn’t exist</span></h1><p> 学过hibernate的都知道hibernate支持n种主键生成策略。但有一种比较诡异，就是sequence。众所周知，oracle 表的主键生成策略是没有自增(identity或者autoIncrement)的，他是通过 sequence 来实现的。而mysql正好与oracle相反，mysql支持自增，恰好不支持 sequence。如果想要在mysql上应用sequence主键生成策略那就悲剧了。 </p>
+<p>其实最简单的办法就是用hibernate实体设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Id</span><br><span class="line">@GeneratedValue(strategy = GenerationType.AUTO)</span><br></pre></td></tr></table></figure>
+<p>网上很多描述主要关于这一点存在两种情况，一种是没设置对id<br>一种是设置了id但是使用了错误的hibernate.xml配置</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/hibernate/sequence/" data-id="cjopxmsqr0003wfo8fto7oku2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hibernate/maven" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/hibernate/maven/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.294Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/hibernate/maven/">spring+hibernate+maven</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#springhibernatemaven">spring+hibernate+maven</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="springhibernatemaven">spring+hibernate+maven</span></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/hibernate/maven/" data-id="cjopxmsqq0002wfo8pwim3b3e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hibernate/hql" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/hibernate/hql/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.289Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Learn-Spring/2018/11/21/hibernate/hql/">hibernate--HQL语法与详细解释</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#hibernate-hql语法与详细解释">hibernate–HQL语法与详细解释</a><ul>
+<li><a href="#实体查询">实体查询：</a></li>
+<li><a href="#实体的更新和删除">实体的更新和删除：</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="hibernatehql语法与详细解释">hibernate–HQL语法与详细解释</span></h1><p>HQL查询：<br>Criteria查询对查询条件进行了面向对象封装，符合编程人员的思维方式，不过HQL(Hibernate Query Lanaguage)查询提供了更加丰富的和灵活的查询特性，因此<br>Hibernate将HQL查询方式立为官方推荐的标准查询方式，HQL查询在涵盖Criteria查询的所有功能的前提下，提供了类似标准SQL语句的查询方式，同时也提供了更<br>加面向对象的封装。完整的HQL语句形势如下：<br>Select/update/delete…… from …… where …… group by …… having …… order by …… asc/desc<br>其中的update/delete为Hibernate3中所新添加的功能，可见HQL查询非常类似于标准SQL查询。由于HQL查询在整个Hibernate实体操作体系中的核心地位，这一节我<br>将专门围绕HQL操作的具体技术细节进行讲解。</p>
+<h3><span id="实体查询">实体查询：</span></h3><p>有关实体查询技术，其实我们在先前已经有多次涉及，比如下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String hql=”from User user ”;</span><br><span class="line">List list=session.CreateQuery(hql).list();</span><br></pre></td></tr></table></figure>
+<p>上面的代码执行结果是，查询出User实体对象所对应的所有数据，而且将数据封装成User实体对象，并且放入List中返回。这里需要注意的是，Hibernate的实体查<br>询存在着对继承关系的判定，比如我们前面讨论映射实体继承关系中的Employee实体对象，它有两个子类分别是HourlyEmployee，SalariedEmployee,如果有这样的<br>HQL语句：“from Employee”,当执行检索时Hibernate会检索出所有Employee类型实体对象所对应的数据（包括它的子类HourlyEmployee，SalariedEmployee对应<br>的数据）。<br>因为HQL语句与标准SQL语句相似，所以我们也可以在HQL语句中使用where字句，并且可以在where字句中使用各种表达式，比较操作符以及使用“and”,”or”连接<br>不同的查询条件的组合。看下面的一些简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from User user where user.age=20;</span><br><span class="line">from User user where user.age between 20 and 30;</span><br><span class="line">from User user where user.age in(20,30);</span><br><span class="line">from User user where user.name is null;</span><br><span class="line">from User user where user.name like ‘%zx%’;</span><br><span class="line">from User user where (user.age%2)=1;</span><br><span class="line">from User user where user.age=20 and user.name like ‘%zx%’;</span><br></pre></td></tr></table></figure>
+<h3><span id="实体的更新和删除">实体的更新和删除：</span></h3><p>   在继续讲解HQL其他更为强大的查询功能前，我们先来讲解以下利用HQL进行实体更新和删除的技术。这项技术功能是Hibernate3的新加入的功能，在Hibernate2<br>中是不具备的。比如在Hibernate2中，如果我们想将数据库中所有18岁的用户的年龄全部改为20岁，那么我们要首先将年龄在18岁的用户检索出来，然后将他们的<br>年龄修改为20岁，最后调用Session.update()语句进行更新。在Hibernate3中对这个问题提供了更加灵活和更具效率的解决办法，如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Transaction trans=session.beginTransaction();</span><br><span class="line">String hql=”update User user set user.age=20 where user.age=18”;</span><br><span class="line">Query queryupdate=session.createQuery(hql);</span><br><span class="line">int ret=queryupdate.executeUpdate();（执行HQL查询批量数据更新，单个对象更新使用session.update(object)）</span><br><span class="line">trans.commit();</span><br></pre></td></tr></table></figure>
+<p>通过这种方式我们可以在Hibernate3中，一次性完成批量数据的更新，对性能的提高是相当的可观。同样也可以通过类似的方式来完成delete操作，如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Transaction trans=session.beginTransaction();</span><br><span class="line">String hql=”delete from User user where user.age=18”;</span><br><span class="line">Query queryupdate=session.createQuery(hql);</span><br><span class="line">int ret=queryupdate.executeUpdate();</span><br><span class="line">trans.commit();</span><br></pre></td></tr></table></figure>
+<p>如果你是逐个章节阅读的化，那么你一定会记起我在第二部分中有关批量数据操作的相关论述中，讨论过这种操作方式，这种操作方式在Hibernate3中称为bulk<br>delete/update，这种方式能够在很大程度上提高操作的灵活性和运行效率，但是采用这种方式极有可能引起缓存同步上的问题(请参考相关论述)。</p>
+<p>###属性查询：<br>   很多时候我们在检索数据时，并不需要获得实体对象所对应的全部数据，而只需要检索实体对象的部分属性所对应的数据。这时候就可以利用HQL属性查询技术<br>，如下面程序示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List list=session.createQuery(“select user.name from User user ”).list();</span><br><span class="line">for(int i=0;i&lt;list.size();i++)&#123;</span><br><span class="line"> System.out.println(list.get(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们只检索了User实体的name属性对应的数据，此时返回的包含结果集的list中每个条目都是String类型的name属性对应的数据。我们也可以一次检索多个属性，<br>如下面程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List list=session.createQuery(“select user.name,user.age from User user ”).list();</span><br><span class="line">for(int i=0;i&lt;list.size();i++)&#123;</span><br><span class="line"> Object[] obj=(Object[])list.get(i);</span><br><span class="line"> System.out.println(obj[0]);</span><br><span class="line"> System.out.println(obj[1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时返回的结果集list中，所包含的每个条目都是一个Object[]类型，其中包含对应的属性数据值。作为当今我们这一代深受面向对象思想影响的开发人员，可能<br>会觉得上面返回Object[]不够符合面向对象风格，这时我们可以利用HQL提供的动态构造实例的功能对这些平面数据进行封装，如下面的程序代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List list=session.createQuery(“select new User(user.name,user.age) from User user ”).list();</span><br><span class="line">for(int i=0;i&lt;list.size();i++)&#123;</span><br><span class="line"> User user=(User)list.get(i);</span><br><span class="line"> System.out.println(user.getName());</span><br><span class="line"> System.out.println(user.getAge());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们通过动态构造实例对象，对返回结果进行了封装，使我们的程序更加符合面向对象风格，但是这里有一个问题必须注意，那就是这时所返回的User对象，<br>仅仅只是一个普通的Java对象而以，除了查询结果值之外，其它的属性值都为null（包括主键值id），也就是说不能通过Session对象对此对象执行持久化的更新操<br>作。如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List list=session.createQuery(“select new User(user.name,user.age) from User user ”).list();</span><br><span class="line">for(int i=0;i&lt;list.size();i++)&#123;</span><br><span class="line"> User user=(User)list.get(i);</span><br><span class="line"> user.setName(“gam”);</span><br><span class="line"> session.saveOrUpdate(user);//这里将会实际执行一个save操作，而不会执行update操作，因为这个User对象的id属性为null，Hibernate会把它作为一个自由对</span><br><span class="line">象（请参考持久化对象状态部分的论述），因此会对它执行save操作。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###分组与排序<br>A、Order by子句：<br>    与SQL语句相似，HQL查询也可以通过order by子句对查询结果集进行排序，并且可以通过asc或者desc关键字指定排序方式，如下面的代码：<br>from User user order by user.name asc,user.age desc;<br>上面HQL查询语句，会以name属性进行升序排序，以age属性进行降序排序，而且与SQL语句一样，默认的排序方式为asc,即升序排序。<br>B、Group by子句与统计查询：<br>在HQL语句中同样支持使用group by子句分组查询，还支持group by子句结合聚集函数的分组统计查询，大部分标准的SQL聚集函数都可以在HQL语句中使用，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">count(),sum(),max(),min(),avg()等。如下面的程序代码：</span><br><span class="line">String hql=”select count(user),user.age from User user group by user.age having count(user)&gt;10 ”;</span><br><span class="line">List list=session.createQuery(hql).list();</span><br></pre></td></tr></table></figure>
+<p>C、优化统计查询：<br>假设我们现在有两张数据库表，分别是customer表和order表，它们的结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">customer </span><br><span class="line">ID varchar2(14) </span><br><span class="line">age number(10) </span><br><span class="line">name varchar2(20)</span><br><span class="line"></span><br><span class="line">order </span><br><span class="line">ID varchar2(14) </span><br><span class="line">order_number number(10) </span><br><span class="line">customer_ID varchar2(14)</span><br><span class="line">现在有两条HQL查询语句，分别如下：</span><br><span class="line">from Customer c inner join c.orders o group by c.age;(1)</span><br><span class="line"> </span><br><span class="line">select c.ID,c.name,c.age,o.ID,o.order_number,o.customer_ID</span><br><span class="line">from Customer c inner join c.orders c group by c.age;(2)</span><br></pre></td></tr></table></figure>
+<p>这两条语句使用了HQL语句的内连接查询（我们将在HQL语句的连接查询部分专门讨论），现在我们可以看出这两条查询语句最后所返回的结果是一样的，但是它们<br>其实是有明显区别的，语句（1）检索的结果会返回Customer与Order持久化对象，而且它们会被置于Hibernate的Session缓存之中，并且Session会负责它们在缓存<br>中的唯一性以及与后台数据库数据的同步，只有事务提交后它们才会从缓存中被清除（之前直接改数据库表内容，没有重新发布，查询出来的值就是改之前的值.PS:查询时没有提交事务）；而语句（2）返回的是关系数据而并非是持久化对象，因此它们不会占用<br>Hibernate的Session缓存，只要在检索之后应用程序不在访问它们，它们所占用的内存就有可能被JVM的垃圾回收器回收，而且Hibernate不会同步对它们的修改。<br>在我们的系统开发中，尤其是Mis系统，不可避免的要进行统计查询的开发，这类功能有两个特点：第一数据量大；第二一般情况下都是只读操作而不会涉及到对统<br>计数据进行修改，那么如果采用第一种查询方式，必然会导致大量持久化对象位于Hibernate的Session缓存中，而且Hibernate的Session缓存还要负责它们与数据<br>库数据的同步。而如果采用第二种查询方式，显然就会提高查询性能，因为不需要Hibernate的Session缓存的管理开销，而且只要应用程序不在使用这些数据，它<br>们所占用的内存空间就会被回收释放。<br>因此在开发统计查询系统时，尽量使用通过select语句写出需要查询的属性的方式来返回关系数据，而避免使用第一种查询方式返回持久化对象（这种方式是在有<br>修改需求时使用比较适合），这样可以提高运行效率并且减少内存消耗。㊣真正的高手并不是精通一切，而是精通在合适的场合使用合适的手段。</p>
+<p>###参数绑定：<br>　　Hibernate中对动态查询参数绑定提供了丰富的支持，那么什么是查询参数动态绑定呢？其实如果我们熟悉传统JDBC编程的话，我们就不难理解查询参数动态绑定，如下代码传统JDBC的参数绑定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　PrepareStatement pre=connection.prepare(“select * from User where user.name=?”);</span><br><span class="line">　　pre.setString(1,”zhaoxin”);</span><br><span class="line">　　ResultSet rs=pre.executeQuery();</span><br></pre></td></tr></table></figure>
+<p>　　在Hibernate中也提供了类似这种的查询参数绑定功能，而且在Hibernate中对这个功能还提供了比传统JDBC操作丰富的多的特性，在Hibernate中共存在4种参数绑定的方式，下面我们将分别介绍：<br>　　A、 按参数名称绑定：<br>　　在HQL语句中定义命名参数要用”:”开头，形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　Query query=session.createQuery(“from User user where user.name=:customername anduser:customerage=:age ”);</span><br><span class="line">　　query.setString(“customername”,name);</span><br><span class="line">　　query.setInteger(“customerage”,age);</span><br></pre></td></tr></table></figure>
+<p>　　<br>　　上面代码中用:customername和:customerage分别定义了命名参数customername和customerage，然后用Query接口的setXXX()方法设定名参数值，setXXX()方法包含两个参数，分别是命名参数名称和命名参数实际值。<br>　　B、 按参数位置邦定：<br>　　在HQL查询语句中用”?”来定义参数位置，形式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　Query query=session.createQuery(“from User user where user.name=? and user.age =? ”);</span><br><span class="line">　　query.setString(0,name);</span><br><span class="line">　　query.setInteger(1,age);</span><br></pre></td></tr></table></figure>
+<p>　　同样使用setXXX()方法设定绑定参数，只不过这时setXXX()方法的第一个参数代表邦定参数在HQL语句中出现的位置编号（由0开始编号），第二个参数仍然代表参数实际值。<br>　　注：在实际开发中，提倡使用按名称邦定命名参数，因为这不但可以提供非常好的程序可读性，而且也提高了程序的易维护性，因为当查询参数的位置发生改变时，按名称邦定名参数的方式中是不需要调整程序代码的。<br>　　C、 setParameter()方法：<br>　　在Hibernate的HQL查询中可以通过setParameter()方法邦定任意类型的参数，如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　String hql=”from User user where user.name=:customername ”;</span><br><span class="line">　　Query query=session.createQuery(hql);</span><br><span class="line">　　query.setParameter(“customername”,name,Hibernate.STRING);</span><br></pre></td></tr></table></figure>
+<p>　　如上面代码所示，setParameter()方法包含三个参数，分别是命名参数名称，命名参数实际值，以及命名参数映射类型。对于某些参数类型setParameter()方法可以根据参数值的Java类型，猜测出对应的映射类型，因此这时不需要显示写出映射类型，像上面的例子，可以直接这样写：<br>　　query.setParameter(“customername”,name);但是对于一些类型就必须写明映射类型，比如java.util.Date类型，因为它会对应Hibernate的多种映射类型，比如Hibernate.DATA或者Hibernate.TIMESTAMP。<br>　　D、 setProperties()方法：(setEntity())<br>　　在Hibernate中可以使用setProperties()方法，将命名参数与一个对象的属性值绑定在一起，如下程序代码：<br>　　<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">　　Customer customer=new Customer();</span><br><span class="line">　　customer.setName(“pansl”);</span><br><span class="line">　　customer.setAge(80);</span><br><span class="line">　　Query query=session.createQuery(“from Customer c where c.name=:name and c.age=:age ”);</span><br><span class="line">　　query.setProperties(customer);</span><br><span class="line">```　　</span><br><span class="line"></span><br><span class="line">　　setProperties()方法会自动将customer对象实例的属性值匹配到命名参数上，但是要求命名参数名称必须要与实体对象相应的属性同名。</span><br><span class="line">　　这里还有一个特殊的setEntity()方法，它会把命名参数与一个持久化对象相关联，如下面代码所示：</span><br></pre></td></tr></table></figure></p>
+<p>　　Customer customer=(Customer)session.load(Customer.class,”1”);<br>　　Query query=session.createQuery(“from Order order where order.customer=:customer ”);<br>　　query. setEntity(“customer”,customer);<br>　　List list=query.list();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　</span><br><span class="line">　　上面的代码会生成类似如下的SQL语句：</span><br></pre></td></tr></table></figure></p>
+<p>　　Select * from order where customer_ID=’1’;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　E、 使用绑定参数的优势：</span><br><span class="line">　　我们为什么要使用绑定命名参数？任何一个事物的存在都是有其价值的，具体到绑定参数对于HQL查询来说，主要有以下两个主要优势：</span><br><span class="line">　　①、 可以利用数据库实施性能优化，因为对Hibernate来说在底层使用的是PrepareStatement来完成查询，因此对于语法相同参数不同的SQL语句，可以充分利用预编译SQL语句缓存，从而提升查询效率。</span><br><span class="line">　　②、 可以防止SQL Injection安全漏洞的产生：</span><br><span class="line">　　SQL Injection是一种专门针对SQL语句拼装的攻击方式，比如对于我们常见的用户登录，在登录界面上，用户输入用户名和口令，这时登录验证程序可能会生成如下的HQL语句：</span><br></pre></td></tr></table></figure></p>
+<p>　　“from User user where user.name=’”+name+”’ and user.password=’”+password+”’ ”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">　　这个HQL语句从逻辑上来说是没有任何问题的，这个登录验证功能在一般情况下也是会正确完成的，但是如果在登录时在用户名中输入”zhaoxin or ‘x’=’x”,这时如果使用简单的HQL语句的字符串拼装，就会生成如下的HQL语句：</span><br></pre></td></tr></table></figure></p>
+<p>　　“from User user where user.name=’zhaoxin’ or ‘x’=’x’ and user.password=’admin’ ”;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　显然这条HQL语句的where字句将会永远为真，而使用户口令的作用失去意义，这就是SQL Injection攻击的基本原理。</span><br><span class="line">　　而使用绑定参数方式，就可以妥善处理这问题,当使用绑定参数时，会得到下面的HQL语句：</span><br></pre></td></tr></table></figure></p>
+<p>　　from User user where user.name=’’zhaoxin’’ or ‘’x=’’x’’ ‘ and user.password=’admin’;<br><code>`</code><br>　　<br>由此可见使用绑定参数会将用户名中输入的单引号解析成字符串（如果想在字符串中包含单引号，应使用重复单引号形式），所以参数绑定能够有效防止SQL Injection安全漏洞。</p>
+<p>转载自：<a href="http://blog.csdn.net/zjkstone/article/details/7884875" target="_blank" rel="noopener">http://blog.csdn.net/zjkstone/article/details/7884875</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/hibernate/hql/" data-id="cjopxmsqz000cwfo8vunjgzrf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Learn-Spring/page/2/">&laquo; Prev</a><a class="page-number" href="/Learn-Spring/">1</a><a class="page-number" href="/Learn-Spring/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/Learn-Spring/page/4/">4</a><a class="extend next" rel="next" href="/Learn-Spring/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/Learn-Spring/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Learn-Spring/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/web/Thymeleaf/README/">thymeleaf介绍</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/war/war/">spring-boot 传统部署方式</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/starter/">Spring Boot应用启动器基本的一共有44种，具体如下：</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/redis/README/">spring-boot使用redis</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/properties/">application.properties相关通用属性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Neo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Learn-Spring/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Learn-Spring/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Learn-Spring/fancybox/jquery.fancybox.css">
+  <script src="/Learn-Spring/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Learn-Spring/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

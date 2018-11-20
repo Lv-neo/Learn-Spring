@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义’白标’（whitelabel，可以了解下相关理念）错误页面   自定义’白标’（whitelabel，可以了解下相关理念）错误页面Spring Boot安装了一个’whitelabel’错误页面，如果你遇到一个服务器错误（机器客户端消费的是JSON，其他媒体类型则会看到一个具有正确错误码的合乎情理的响应），那就能在客户端浏览器中看到该页面。你可以设置error.whitelabel.e">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面">
+<meta property="og:url" content="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="自定义’白标’（whitelabel，可以了解下相关理念）错误页面   自定义’白标’（whitelabel，可以了解下相关理念）错误页面Spring Boot安装了一个’whitelabel’错误页面，如果你遇到一个服务器错误（机器客户端消费的是JSON，其他媒体类型则会看到一个具有正确错误码的合乎情理的响应），那就能在客户端浏览器中看到该页面。你可以设置error.whitelabel.e">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-11-20T16:09:49.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面">
+<meta name="twitter:description" content="自定义’白标’（whitelabel，可以了解下相关理念）错误页面   自定义’白标’（whitelabel，可以了解下相关理念）错误页面Spring Boot安装了一个’whitelabel’错误页面，如果你遇到一个服务器错误（机器客户端消费的是JSON，其他媒体类型则会看到一个具有正确错误码的合乎情理的响应），那就能在客户端浏览器中看到该页面。你可以设置error.whitelabel.e">
+  
+    <link rel="alternate" href="/Learn-Spring/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Learn-Spring/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Learn-Spring/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/">Home</a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Learn-Spring/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lv-neo.github.io/Learn-Spring"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring-boot/exception/whitelabel" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.413Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#自定义白标whitelabel可以了解下相关理念错误页面">自定义’白标’（whitelabel，可以了解下相关理念）错误页面</a></li>
+</ul>
+<!-- tocstop -->
+<h1><span id="自定义白标whitelabel可以了解下相关理念错误页面">自定义’白标’（whitelabel，可以了解下相关理念）错误页面</span></h1><p>Spring Boot安装了一个’whitelabel’错误页面，如果你遇到一个服务器错误（机器客户端消费的是JSON，其他媒体类型则会看到一个具有正确错误码的合乎情理的响应），那就能在客户端浏览器中看到该页面。你可以设置error.whitelabel.enabled=false来关闭该功能，但通常你想要添加自己的错误页面来取代whitelabel。确切地说，如何实现取决于你使用的模板技术。例如，你正在使用Thymeleaf，你将添加一个error.html模板。如果你正在使用FreeMarker，那你将添加一个error.ftl模板。通常，你需要的只是一个名称为error的View，和/或一个处理/error路径的@Controller。除非你替换了一些默认配置，否则你将在你的ApplicationContext中找到一个BeanNameViewResolver，所以一个id为error的@Bean可能是完成该操作的一个简单方式。详情参考ErrorMvcAutoConfiguration。<br>查看Error Handling章节，了解下如何将处理器（handlers）注册到servlet容器中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/" data-id="cjopxmsr6000lwfo8k87vnhwz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Learn-Spring/2018/11/21/spring-boot/file/loadFile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何在spring boot中加载文件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/exception/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ErrorController</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/Learn-Spring/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Learn-Spring/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/web/Thymeleaf/README/">thymeleaf介绍</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/war/war/">spring-boot 传统部署方式</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/starter/">Spring Boot应用启动器基本的一共有44种，具体如下：</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/redis/README/">spring-boot使用redis</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/properties/">application.properties相关通用属性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Neo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Learn-Spring/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Learn-Spring/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Learn-Spring/fancybox/jquery.fancybox.css">
+  <script src="/Learn-Spring/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Learn-Spring/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

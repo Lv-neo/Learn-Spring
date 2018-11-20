@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>IoC &amp;&amp; DI | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IoC &amp;amp;&amp;amp; DI IOC 是什么？ 能做什么   DI IOC和DI 我对IOC和DI的理解 附录     IoC &amp;amp;&amp;amp; DI##前言学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对S">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IoC &amp;&amp; DI">
+<meta property="og:url" content="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/ioc_di/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="IoC &amp;amp;&amp;amp; DI IOC 是什么？ 能做什么   DI IOC和DI 我对IOC和DI的理解 附录     IoC &amp;amp;&amp;amp; DI##前言学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对S">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://lv-neo.github.io/img/ioc/1.jpg">
+<meta property="og:image" content="https://lv-neo.github.io/img/ioc/2.jpg">
+<meta property="og:updated_time" content="2018-11-20T16:09:49.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IoC &amp;&amp; DI">
+<meta name="twitter:description" content="IoC &amp;amp;&amp;amp; DI IOC 是什么？ 能做什么   DI IOC和DI 我对IOC和DI的理解 附录     IoC &amp;amp;&amp;amp; DI##前言学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对S">
+<meta name="twitter:image" content="https://lv-neo.github.io/img/ioc/1.jpg">
+  
+    <link rel="alternate" href="/Learn-Spring/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Learn-Spring/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Learn-Spring/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/">Home</a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Learn-Spring/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lv-neo.github.io/Learn-Spring"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring/ioc_di" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring/ioc_di/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.357Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IoC &amp;&amp; DI
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#ioc-di">IoC &amp;&amp; DI</a><ul>
+<li><a href="#ioc">IOC</a><ul>
+<li><a href="#是什么">是什么？</a></li>
+<li><a href="#能做什么">能做什么</a></li>
+</ul>
+</li>
+<li><a href="#di">DI</a></li>
+<li><a href="#ioc和di">IOC和DI</a></li>
+<li><a href="#我对ioc和di的理解">我对IOC和DI的理解</a></li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="ioc-ampamp-di">IoC &amp;&amp; DI</span></h1><p>##前言<br>学习过Spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对Spring框架的IOC和DI的理解以及谈谈我对Ioc和DI的理解。</p>
+<ul>
+<li><a href="http://jinnianshilongnian.iteye.com/blog/1413846" target="_blank" rel="noopener">开涛的分享</a></li>
+</ul>
+<h2><span id="ioc">IOC</span></h2><h3><span id="是什么">是什么？</span></h3><p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想。在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。如何理解好Ioc呢？理解好Ioc的关键是要明确“谁控制谁，控制什么，为何是反转（有反转就应该有正转了），哪些方面反转了”，那我们来深入分析一下：</p>
+<ul>
+<li><p>谁控制谁，控制什么：传统Java SE程序设计，我们直接在对象内部通过new进行创建对象，是程序主动去创建依赖对象；而IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对 象的创建；谁控制谁？当然是IoC 容器控制了对象；控制什么？那就是主要控制了外部资源获取（不只是对象包括比如文件等）。</p>
+</li>
+<li><p>为何是反转，哪些方面反转了：有反转就有正转，传统应用程序是由我们自己在对象中主动控制去直接获取依赖对象，也就是正转；而反转则是由容器来帮忙创建及注入依赖对象；为何是反转？因为由容器帮我们查找及注入依赖对象，对象只是被动的接受依赖对象，所以是反转；哪些方面反转了？依赖对象的获取被反转了。</p>
+</li>
+</ul>
+<p>先看下传统程序设计，都是主动创建对象实例进行组装<br><img src="/img/ioc/1.jpg" alt="alt"></p>
+<p>当有了IoC/DI的容器后，在客户端类中不再主动去创建这些对象了<br><img src="/img/ioc/2.jpg" alt="alt"></p>
+<h3><span id="能做什么">能做什么</span></h3><p>　IoC 不是一种技术，只是一种思想，一个重要的面向对象编程的法则，它能指导我们如何设计出松耦合、更优良的程序。传统应用程序都是由我们在类内部主动创建依赖对象，从而导致类与类之间高耦合，难于测试；有了IoC容器后，把创建和查找依赖对象的控制权交给了容器，由容器进行注入组合对象，所以对象与对象之间是 松散耦合，这样也方便测试，利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</p>
+<p>　　其实IoC对编程带来的最大改变不是从代码上，而是从思想上，发生了“主从换位”的变化。应用程序原本是老大，要获取什么资源都是主动出击，但是在IoC/DI思想中，应用程序就变成被动的了，被动的等待IoC容器来创建并注入它所需要的资源了。</p>
+<p>　　IoC很好的体现了面向对象设计法则之一—— 好莱坞法则：“别找我们，我们找你”；即由IoC容器帮对象找相应的依赖对象并注入，而不是由对象主动去找。</p>
+<h2><span id="di">DI</span></h2><p>DI—Dependency Injection，即“依赖注入”：组件之间依赖关系由容器在运行期决定，形象的说，即由容器动态的将某个依赖关系注入到组件之中。依赖注入的目的并非为软件系统带来更多功能，而是为了提升组件重用的频率，并为系统搭建一个灵活、可扩展的平台。通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现。</p>
+<p>理解DI的关键是：“谁依赖谁，为什么需要依赖，谁注入谁，注入了什么”，那我们来深入分析一下：</p>
+<p>●谁依赖于谁：当然是应用程序依赖于IoC容器；<br>●为什么需要依赖：应用程序需要IoC容器来提供对象需要的外部资源；<br>●谁注入谁：很明显是IoC容器注入应用程序某个对象，应用程序依赖的对象；<br>●注入了什么：就是注入某个对象所需要的外部资源（包括对象、资源、常量数据）。</p>
+<h2><span id="ioc和di">IOC和DI</span></h2><p>IoC和DI由什么关系呢？其实它们是同一个概念的不同角度描述，由于控制反转概念比较含糊（可能只是理解为容器控制对象这一个层面，很难让人想到谁来维护对象关系），所以2004年大师级人物Martin Fowler又给出了一个新的名字：“依赖注入”，相对IoC 而言，“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”。</p>
+<h2><span id="我对ioc和di的理解">我对IOC和DI的理解</span></h2><p>在日常的开发过程中，我们在实现某个业务场景时候，往往需要多个对象支撑业务构建，在没有使用IOC和DI的时候，我们需要在对象中使用合作对象，均通过new object()的方式动态创建出来，这个时候A要使用B就产生了强依赖，A和B产生了紧密耦合。<br>在Spring中，这一切由spring帮助我们实现，我们只需要在A中告诉spring需要一个B的connection，至于它如何构造，何时构造，A不需要知道。在系统运行时候，spring会在适当时候制造一个Connection，注入到A中。<br>这个时候所有的依赖关系都变了，全部依赖IOC容器，将以前创建对象的主动权和时机移交给IOC容器。</p>
+<h2><span id="附录">附录</span></h2><p>注：如果想要更加深入的了解IoC和DI，请参考大师级人物Martin Fowler的一篇经典文章<a href="http://www.martinfowler.com/articles/injection.html" target="_blank" rel="noopener">《Inversion of Control Containers and the Dependency Injection pattern》</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring/ioc_di/" data-id="cjopxmsqv0009wfo8zv9v793l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Learn-Spring/2018/11/21/spring/mvc/aop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          aop开发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Learn-Spring/2018/11/21/spring/aop/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">面向切面</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/Learn-Spring/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Learn-Spring/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/web/Thymeleaf/README/">thymeleaf介绍</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/war/war/">spring-boot 传统部署方式</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/starter/">Spring Boot应用启动器基本的一共有44种，具体如下：</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/redis/README/">spring-boot使用redis</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/properties/">application.properties相关通用属性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Neo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Learn-Spring/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Learn-Spring/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Learn-Spring/fancybox/jquery.fancybox.css">
+  <script src="/Learn-Spring/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Learn-Spring/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
