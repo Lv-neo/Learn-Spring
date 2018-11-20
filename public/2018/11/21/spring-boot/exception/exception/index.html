@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ErrorController | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ErrorController 在Servlet容器中添加了一个默认的错误页面     ErrorController背景 Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理，参看以下 在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Sprin">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ErrorController">
+<meta property="og:url" content="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/exception/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ErrorController 在Servlet容器中添加了一个默认的错误页面     ErrorController背景 Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理，参看以下 在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Sprin">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/exception/imgs/SpringBootWebExceptionResolver.png">
+<meta property="og:updated_time" content="2018-11-20T16:09:49.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ErrorController">
+<meta name="twitter:description" content="ErrorController 在Servlet容器中添加了一个默认的错误页面     ErrorController背景 Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理，参看以下 在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Sprin">
+<meta name="twitter:image" content="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/exception/imgs/SpringBootWebExceptionResolver.png">
+  
+    <link rel="alternate" href="/Learn-Spring/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Learn-Spring/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Learn-Spring/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/">Home</a>
+        
+          <a class="main-nav-link" href="/Learn-Spring/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Learn-Spring/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://lv-neo.github.io/Learn-Spring"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring-boot/exception/exception" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/exception/" class="article-date">
+  <time datetime="2018-11-20T16:09:49.407Z" itemprop="datePublished">2018-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ErrorController
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+<ul>
+<li><a href="#errorcontroller">ErrorController</a><ul>
+<li><a href="#在servlet容器中添加了一个默认的错误页面">在Servlet容器中添加了一个默认的错误页面</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1><span id="errorcontroller">ErrorController</span></h1><p>背景</p>
+<p>Springboot 默认把异常的处理集中到一个ModelAndView中了，但项目的实际过程中，这样做，并不能满足我们的要求。具体的自定义异常的处理，参看以下</p>
+<p>在Spring MVC异常处理详解中，介绍了Spring MVC的异常处理体系，本文将讲解在此基础上Spring Boot为我们做了哪些工作。下图列出了Spring Boot中跟MVC异常处理相关的类。</p>
+<p><img src="imgs/SpringBootWebExceptionResolver.png" alt="alt"></p>
+<p>Spring Boot在启动过程中会根据当前环境进行AutoConfiguration，其中跟MVC错误处理相关的配置内容，在ErrorMvcAutoConfiguration这个类中。以下会分块介绍这个类里面的配置。</p>
+<h2><span id="在servlet容器中添加了一个默认的错误页面">在Servlet容器中添加了一个默认的错误页面</span></h2><p>因为ErrorMvcAutoConfiguration类实现了EmbeddedServletContainerCustomizer接口，所以可以通过override customize方法来定制Servlet容器。以下代码摘自ErrorMvcAutoConfiguration：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value</span>(<span class="string">"$&#123;error.path:/error&#125;"</span>)</span><br><span class="line"><span class="keyword">private</span> String errorPath = <span class="string">"/error"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">    container.addErrorPages(<span class="keyword">new</span> ErrorPage(<span class="keyword">this</span>.properties.getServletPrefix()</span><br><span class="line">        + <span class="keyword">this</span>.errorPath));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到ErrorMvcAutoConfiguration在容器中，添加了一个错误页面/error。因为这项配置的存在，如果Spring MVC在处理过程抛出异常到Servlet容器，容器会定向到这个错误页面/error。</p>
+<p>那么我们有什么可以配置的呢？</p>
+<p>我们可以配置错误页面的url，/error是默认值，我们可以再application.properties中通过设置error.path的值来配置该页面的url；<br>我们可以提供一个自定义的EmbeddedServletContainerCustomizer，添加更多的错误页面，比如对不同的http status code，使用不同的错误处理页面。就像下面这段代码一样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EmbeddedServletContainerCustomizer <span class="title">containerCustomizer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedServletContainerCustomizer() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">            container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.NOT_FOUND, <span class="string">"/404"</span>));</span><br><span class="line">            container.addErrorPages(<span class="keyword">new</span> ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, <span class="string">"/500"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###定义了ErrorAttributes接口，并默认配置了一个DefaultErrorAttributes Bean</p>
+<p>以下代码摘自ErrorMvcAutoConfiguration：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>(value = ErrorAttributes.class, search = SearchStrategy.CURRENT)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultErrorAttributes <span class="title">errorAttributes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultErrorAttributes();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下代码摘自DefaultErrorAttributes, ErrorAttributes, HandlerExceptionResolver：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Order</span>(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultErrorAttributes</span> <span class="keyword">implements</span> <span class="title">ErrorAttributes</span>, <span class="title">HandlerExceptionResolver</span>,</span></span><br><span class="line"><span class="class">    <span class="title">Ordered</span> </span>&#123;</span><br><span class="line">    <span class="comment">//篇幅原因，忽略类的实现代码。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ErrorAttributes</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span><span class="params">(RequestAttributes requestAttributes,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">boolean</span> includeStackTrace)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Throwable <span class="title">getError</span><span class="params">(RequestAttributes requestAttributes)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerExceptionResolver</span> </span>&#123;</span><br><span class="line">    <span class="function">ModelAndView <span class="title">resolveException</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个DefaultErrorAttributes有什么用呢？主要有两个作用:</p>
+<ol>
+<li>实现了ErrorAttributes接口，具备提供Error Attributes的能力，当处理/error错误页面时，需要从该bean中读取错误信息以供返回；</li>
+<li>实现了HandlerExceptionResolver接口并具有最高优先级，即DispatcherServlet在doDispatch过程中有异常抛出时，先由DefaultErrorAttributes处理。从下面代码中可以发现，DefaultErrorAttributes在处理过程中，是讲ErrorAttributes保存到了request中。事实上，这是DefaultErrorAttributes能够在后面返回Error Attributes的原因，实现HandlerExceptionResolver接口，是DefaultErrorAttributes实现ErrorAttributes接口的手段。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">resolveException</span><span class="params">(HttpServletRequest request,</span></span></span><br><span class="line"><span class="function"><span class="params">    HttpServletResponse response, Object handler, Exception ex)</span> </span>&#123;</span><br><span class="line">    storeErrorAttributes(request, ex);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们有什么可以配置的呢？</p>
+<p>1、我们可以继承DefaultErrorAttributes，修改Error Attributes，比如下面这段代码，去掉了默认存在的error和exception这两个字段，以隐藏敏感信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> DefaultErrorAttributes <span class="title">errorAttributes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DefaultErrorAttributes() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span> <span class="params">(RequestAttributes requestAttributes,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">boolean</span> includeStackTrace)</span></span>&#123;</span><br><span class="line">            Map&lt;String, Object&gt; errorAttributes = <span class="keyword">super</span>.getErrorAttributes(requestAttributes, includeStackTrace);</span><br><span class="line">            errorAttributes.remove(<span class="string">"error"</span>);</span><br><span class="line">            errorAttributes.remove(<span class="string">"exception"</span>);</span><br><span class="line">            <span class="keyword">return</span> errorAttributes;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>我们可以自己实现ErrorAttributes接口，实现自己的Error Attributes方案, 只要配置一个类型为ErrorAttributes的bean，默认的DefaultErrorAttributes就不会被配置。</li>
+</ol>
+<p>###提供并配置了ErrorController和ErrorView<br>ErrorController和ErrorView提供了对错误页面/error的支持。ErrorMvcAutoConfiguration默认配置了BasicErrorController和WhiteLabelErrorView，以下代码摘自ErrorMvcAutoConfiguration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>(value = ErrorController.class, search = SearchStrategy.CURRENT)</span><br><span class="line"><span class="function"><span class="keyword">public</span> BasicErrorController <span class="title">basicErrorController</span><span class="params">(ErrorAttributes errorAttributes)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BasicErrorController(errorAttributes);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"error.whitelabel"</span>, name = <span class="string">"enabled"</span>, matchIfMissing = <span class="keyword">true</span>)</span><br><span class="line"><span class="meta">@Conditional</span>(ErrorTemplateMissingCondition.class)</span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WhitelabelErrorViewConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> SpelView defaultErrorView = <span class="keyword">new</span> SpelView(</span><br><span class="line">            <span class="string">"&lt;html&gt;&lt;body&gt;&lt;h1&gt;Whitelabel Error Page&lt;/h1&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;p&gt;This application has no explicit mapping for /error, so you are seeing this as a fallback.&lt;/p&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div id='created'&gt;$&#123;timestamp&#125;&lt;/div&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div&gt;There was an unexpected error (type=$&#123;error&#125;, status=$&#123;status&#125;).&lt;/div&gt;"</span></span><br><span class="line">                    + <span class="string">"&lt;div&gt;$&#123;message&#125;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"error"</span>)</span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(name = <span class="string">"error"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">defaultErrorView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.defaultErrorView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If the user adds @EnableWebMvc then the bean name view resolver from</span></span><br><span class="line">    <span class="comment">// WebMvcAutoConfiguration disappears, so add it back in to avoid disappointment.</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span>(BeanNameViewResolver.class)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> BeanNameViewResolver <span class="title">beanNameViewResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BeanNameViewResolver resolver = <span class="keyword">new</span> BeanNameViewResolver();</span><br><span class="line">        resolver.setOrder(Ordered.LOWEST_PRECEDENCE - <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> resolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ErrorController根据Accept头的内容，输出不同格式的错误响应。比如针对浏览器的请求生成html页面，针对其它请求生成json格式的返回。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"$&#123;error.path:/error&#125;"</span>, produces = <span class="string">"text/html"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ModelAndView <span class="title">errorHtml</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ModelAndView(<span class="string">"error"</span>, getErrorAttributes(request, <span class="keyword">false</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"$&#123;error.path:/error&#125;"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request) &#123;</span><br><span class="line">    Map&lt;String, Object&gt; body = getErrorAttributes(request, getTraceParameter(request));</span><br><span class="line">    HttpStatus status = getStatus(request);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(body, status);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>WhitelabelErrorView则提供了一个默认的白板错误页面。</p>
+<p>我们有什么可以配置的呢？</p>
+<p>我们可以提供自己的名字为error的view，以替换掉默认的白板页面，提供自己想要的样式。<br>我们可以继承BasicErrorController或者干脆自己实现ErrorController接口，用来响应/error这个错误页面请求，可以提供更多类型的错误格式等。<br>总结<br>Spring Boot提供了默认的统一错误页面，这是Spring MVC没有提供的。在理解了Spring Boot提供的错误处理相关内容之后，我们可以方便的定义自己的错误返回的格式和内容。不过，如果要实现统一的REST API接口的出错响应，就如这篇文章里的这样，还是要做不少工作的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lv-neo.github.io/Learn-Spring/2018/11/21/spring-boot/exception/exception/" data-id="cjopyc4yx001qf6o8pc4lz53x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/whitelabel/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          自定义&#39;白标&#39;（whitelabel，可以了解下相关理念）错误页面
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Learn-Spring/2018/11/21/spring-boot/exception/errorController/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Springboot自定义异常处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Learn-Spring/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/Learn-Spring/tags/java/" style="font-size: 10px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Learn-Spring/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/web/Thymeleaf/README/">thymeleaf介绍</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/war/war/">spring-boot 传统部署方式</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/starter/">Spring Boot应用启动器基本的一共有44种，具体如下：</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/redis/README/">spring-boot使用redis</a>
+          </li>
+        
+          <li>
+            <a href="/Learn-Spring/2018/11/21/spring-boot/properties/">application.properties相关通用属性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Neo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Learn-Spring/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Learn-Spring/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Learn-Spring/fancybox/jquery.fancybox.css">
+  <script src="/Learn-Spring/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Learn-Spring/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
